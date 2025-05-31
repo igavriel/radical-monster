@@ -449,8 +449,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   treePrefab: {fileID: 4429187391274817046, guid: 4f96e2c5639124c94a58bd20b0900d3f, type: 3}
   treeCount: 20
-  spawnPadding: 0.5
   spawnArea: {fileID: 579757893}
+  spawnPadding: 0.5
 --- !u!4 &1073384738
 Transform:
   m_ObjectHideFlags: 0
@@ -565,6 +565,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 7156980296924121551, guid: 5ca45f4ab567b44cda949dda7b56aab2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8274622642979651277, guid: 5ca45f4ab567b44cda949dda7b56aab2, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -654,9 +658,9 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 7468781106817266543}
   - {fileID: 519420032}
   - {fileID: 619394802}
   - {fileID: 1073384738}
-  - {fileID: 7468781106817266543}
   - {fileID: 1175347795}
   - {fileID: 579757894}

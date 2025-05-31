@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public enum State
@@ -27,10 +28,16 @@ public class MonsterAnimationController : MonoBehaviour
                 Idle();
                 break;
             case State.WakeUp:
-                animator.SetTrigger("idle");
-                currentState = State.Idle;
+                StartCoroutine(StartIdleAnimation());
                 break;
         }
+    }
+
+    IEnumerator StartIdleAnimation()
+    {
+        yield return new WaitForEndOfFrame(); // wait 1 frame
+        animator.SetTrigger("idle");
+        currentState = State.Idle;
     }
 
     public void GoToSleep()
@@ -38,14 +45,20 @@ public class MonsterAnimationController : MonoBehaviour
         switch (currentState)
         {
             case State.Idle:
-                animator.SetTrigger("gotoSleep");
-                currentState = State.Sleep;
+                StartCoroutine(StartSleepAnimation());
                 break;
             case State.WakeUp:
                 Idle();
                 GoToSleep();
                 break;
         }
+    }
+
+    IEnumerator StartSleepAnimation()
+    {
+        yield return new WaitForEndOfFrame(); // wait 1 frame
+        animator.SetTrigger("gotoSleep");
+        currentState = State.Sleep;
     }
 
     public void WakeUp()
@@ -57,9 +70,15 @@ public class MonsterAnimationController : MonoBehaviour
                 WakeUp();
                 break;
             case State.Sleep:
-                animator.SetTrigger("wakeUp");
-                currentState = State.WakeUp;
+                StartCoroutine(WakeupAnimation());
                 break;
         }
+    }
+
+    IEnumerator WakeupAnimation()
+    {
+        yield return new WaitForEndOfFrame(); // wait 1 frame
+        animator.SetTrigger("wakeUp");
+        currentState = State.WakeUp;
     }
 }
