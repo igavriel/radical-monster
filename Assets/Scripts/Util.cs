@@ -35,7 +35,9 @@ public static class Util
         if (obj == null)
         {
             Debug.LogError(message);
+#if UNITY_EDITOR
             throw new UnityException(message);
+#endif
         }
     }
 

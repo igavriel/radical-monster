@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -15,8 +16,8 @@ public class WakeSceneManager : MonoBehaviour
         monsterController = FindFirstObjectByType<MonsterAnimationController>();
         Util.AssertObject(monsterController, "MonsterAnimationController not found in the scene.");
 
+        monsterController.SetStartStateWakeUp();
         buildSummaryText();
-        monsterController.WakeUp();
     }
 
     private void buildSummaryText()

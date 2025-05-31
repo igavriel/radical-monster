@@ -7,16 +7,17 @@ public class MainSceneManager : MonoBehaviour
     public GameObject comicsBalloon;
     public TMP_Text comicsText;
 
+    private MonsterAnimationController monsterController;
+
     void Start()
     {
         Util.AssertObject(comicsBalloon, "Comics Balloon is not assigned in the inspector.");
         Util.AssertObject(comicsText, "Comics Text is not assigned in the inspector.");
 
-        MonsterAnimationController monsterController =
-            FindFirstObjectByType<MonsterAnimationController>();
+        monsterController = FindFirstObjectByType<MonsterAnimationController>();
         Util.AssertObject(monsterController, "MonsterAnimationController not found in the scene.");
 
-        monsterController.Idle();
+        monsterController.SetStartStateIdle();
         comicsBalloon.SetActive(false);
     }
 
@@ -26,6 +27,7 @@ public class MainSceneManager : MonoBehaviour
     {
         comicsText.text = Util.GetRandomSleepMessage();
         comicsBalloon.SetActive(true);
+        monsterController.ChangeStateToSleep();
 
         yield return new WaitForSeconds(2f);
         comicsBalloon.SetActive(false);

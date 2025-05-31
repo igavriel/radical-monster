@@ -21,7 +21,7 @@ public class SleepSceneManager : MonoBehaviour
         monsterController = FindFirstObjectByType<MonsterAnimationController>();
         Util.AssertObject(monsterController, "MonsterAnimationController not found in the scene.");
 
-        monsterController.GoToSleep();
+        monsterController.SetStartStateSleep();
         comicsBalloon.SetActive(false);
     }
 
@@ -44,6 +44,7 @@ public class SleepSceneManager : MonoBehaviour
     private IEnumerator WakeupRoutine()
     {
         GameManager.Instance.StopSleepSession();
+        monsterController.ChangeStateToWakeUp();
         comicsText.text = Util.GetRandomWakeMessage();
         comicsBalloon.SetActive(true);
         timerText.gameObject.SetActive(false);

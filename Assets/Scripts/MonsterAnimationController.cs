@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public enum State
@@ -19,66 +18,66 @@ public class MonsterAnimationController : MonoBehaviour
         Util.AssertObject(animator, "Animator component is not assigned in the inspector.");
     }
 
-    public void Idle()
+    public void SetStartStateIdle()
     {
-        switch (currentState)
-        {
-            case State.Sleep:
-                WakeUp();
-                Idle();
-                break;
-            case State.WakeUp:
-                StartCoroutine(StartIdleAnimation());
-                break;
-        }
-    }
-
-    IEnumerator StartIdleAnimation()
-    {
-        yield return new WaitForEndOfFrame(); // wait 1 frame
-        animator.SetTrigger("idle");
+        animator.Play("Idle_Wake_Sad");
         currentState = State.Idle;
     }
 
-    public void GoToSleep()
+    public void SetStartStateSleep()
     {
-        switch (currentState)
-        {
-            case State.Idle:
-                StartCoroutine(StartSleepAnimation());
-                break;
-            case State.WakeUp:
-                Idle();
-                GoToSleep();
-                break;
-        }
-    }
-
-    IEnumerator StartSleepAnimation()
-    {
-        yield return new WaitForEndOfFrame(); // wait 1 frame
-        animator.SetTrigger("gotoSleep");
+        animator.Play("Idle_Sleep");
         currentState = State.Sleep;
     }
 
-    public void WakeUp()
+    public void SetStartStateWakeUp()
+    {
+        animator.Play("Idle_Wake_Happy");
+        currentState = State.WakeUp;
+    }
+
+    public void ChangeStateToIdle()
     {
         switch (currentState)
         {
-            case State.Idle:
-                GoToSleep();
-                WakeUp();
-                break;
             case State.Sleep:
-                StartCoroutine(WakeupAnimation());
+                ChangeStateToWakeUp();
+                ChangeStateToIdle();
+                break;
+            case State.WakeUp:
+                animator.SetTrigger("idle");
+                currentState = State.Idle;
                 break;
         }
     }
 
-    IEnumerator WakeupAnimation()
+    public void ChangeStateToSleep()
     {
-        yield return new WaitForEndOfFrame(); // wait 1 frame
-        animator.SetTrigger("wakeUp");
-        currentState = State.WakeUp;
+        switch (currentState)
+        {
+            case State.Idle:
+                animator.SetTrigger("gotoSleep");
+                currentState = State.Sleep;
+                break;
+            case State.WakeUp:
+                ChangeStateToIdle();
+                ChangeStateToSleep();
+                break;
+        }
+    }
+
+    public void ChangeStateToWakeUp()
+    {
+        switch (currentState)
+        {
+            case State.Idle:
+                ChangeStateToSleep();
+                ChangeStateToWakeUp();
+                break;
+            case State.Sleep:
+                animator.SetTrigger("wakeUp");
+                currentState = State.WakeUp;
+                break;
+        }
     }
 }
