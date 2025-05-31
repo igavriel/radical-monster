@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -21,11 +20,17 @@ public class SleepSceneManager : MonoBehaviour
         monsterController = FindFirstObjectByType<MonsterAnimationController>();
         Util.AssertObject(monsterController, "MonsterAnimationController not found in the scene.");
 
-        monsterController.SetStartStateSleep();
+        StartCoroutine(InitializeSleep());
         comicsBalloon.SetActive(false);
     }
 
-    void Update()
+    private IEnumerator InitializeSleep()
+    {
+        yield return new WaitForSeconds(0f);
+        monsterController.SetStartStateSleep();
+    }
+
+    private void Update()
     {
         if (!GameManager.Instance.IsSleeping())
             return;

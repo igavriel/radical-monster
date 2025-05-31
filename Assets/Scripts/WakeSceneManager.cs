@@ -16,8 +16,14 @@ public class WakeSceneManager : MonoBehaviour
         monsterController = FindFirstObjectByType<MonsterAnimationController>();
         Util.AssertObject(monsterController, "MonsterAnimationController not found in the scene.");
 
-        monsterController.SetStartStateWakeUp();
+        StartCoroutine(InitializeWakeUp());
         buildSummaryText();
+    }
+
+    private IEnumerator InitializeWakeUp()
+    {
+        yield return new WaitForSeconds(0f);
+        monsterController.SetStartStateWakeUp();
     }
 
     private void buildSummaryText()
