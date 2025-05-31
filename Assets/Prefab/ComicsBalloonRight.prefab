@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6106301012059147997}
   - component: {fileID: 5296124128386407857}
   m_Layer: 5
-  m_Name: Text-Welocome
+  m_Name: ComicsText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 6140473502664239019}
   - component: {fileID: 5621150773790526072}
   m_Layer: 5
-  m_Name: CommicsBalloon
+  m_Name: ComicsBalloonRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -203,7 +203,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -7449601141366482223, guid: 86286991a25dd4960bc679d088bc76a7, type: 3}
+  m_Sprite: {fileID: -5872793476778912293, guid: 97fe1d60f867643bb97caca6d40dbbf9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
