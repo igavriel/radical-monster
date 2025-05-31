@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     public int flowerWinTimerSeconds = 60; // seconds to win a flower
     public List<FlowerData> flowers = new();
 
+    private readonly string SLEEP_SCENE_NAME = "3-2-sleep";
+
     [Header("Debug")]
     public int debugAddSeconds = 10;
 
@@ -31,7 +33,7 @@ public class GameManager : MonoBehaviour
 
     private bool isSleepingScene()
     {
-        return SceneManager.GetActiveScene().name == "3-2-sleep";
+        return SceneManager.GetActiveScene().name == SLEEP_SCENE_NAME;
     }
 
     public void debug_IncreaseSleepTime()
@@ -54,6 +56,8 @@ public class GameManager : MonoBehaviour
     {
         currentSleepTime = 0;
         lastGameTime = DateTime.Now;
+
+        SceneManager.LoadScene(SLEEP_SCENE_NAME);
     }
 
     public void EndSleepSession()

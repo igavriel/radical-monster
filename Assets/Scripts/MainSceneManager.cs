@@ -7,8 +7,6 @@ public class MainSceneManager : MonoBehaviour
     public GameObject comicsBalloon;
     public TMP_Text comicsText;
 
-    private MonsterAnimationController monsterController;
-
     string[] sleepMessages =
     {
         "הגיע הזמן לישון...",
@@ -20,25 +18,18 @@ public class MainSceneManager : MonoBehaviour
 
     void Start()
     {
+        Util.AssertObject(comicsBalloon, "Comics Balloon is not assigned in the inspector.");
+        Util.AssertObject(comicsText, "Comics Text is not assigned in the inspector.");
+
+        MonsterAnimationController monsterController = FindFirstObjectByType<MonsterAnimationController>();
+        Util.AssertObject(monsterController, "MonsterAnimationController not found in the scene.");
+
+        monsterController.Idle();
         comicsBalloon.SetActive(false);
-        monsterController = FindFirstObjectByType<MonsterAnimationController>();
-        if (monsterController == null)
-        {
-            Debug.LogError("MonsterAnimationController not found in the scene.");
-        }
-        else
-        {
-            monsterController.Idle();
-        }
     }
 
     public void OnGotoSleepButtonClicked()
     {
-        if (monsterController == null)
-        {
-            Debug.LogError("MonsterAnimationController not found in the scene.");
-            return;
-        }
         StartCoroutine(GotoSleepRoutine());
     }
 
@@ -49,9 +40,7 @@ public class MainSceneManager : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
         comicsBalloon.SetActive(false);
-
         GameManager.Instance.StartSleepSession();
-        monsterController.GoToSleep();
     }
 
     string GetRandomSleepMessage() => sleepMessages[Random.Range(0, sleepMessages.Length)];

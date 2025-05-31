@@ -15,6 +15,7 @@ public class MonsterAnimationController : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        Util.AssertObject(animator, "Animator component is not assigned in the inspector.");
     }
 
     public void Idle()
