@@ -20,10 +20,7 @@ public class MainSceneManager : MonoBehaviour
         comicsBalloon.SetActive(false);
     }
 
-    public void OnGotoSleepButtonClicked()
-    {
-        StartCoroutine(GotoSleepRoutine());
-    }
+    public void OnGotoSleepButtonClicked() => StartCoroutine(GotoSleepRoutine());
 
     private IEnumerator GotoSleepRoutine()
     {

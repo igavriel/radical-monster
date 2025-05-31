@@ -33,10 +33,13 @@ public class SleepSceneManager : MonoBehaviour
         timerText.text = Util.GetFormattedTime(GameManager.Instance.currentSleepTime);
     }
 
-    public void OnWakeupButtonClicked()
-    {
-        StartCoroutine(WakeupRoutine());
-    }
+    public void OnDebug_IncreaseSleepSec_ButtonClicked() =>
+        GameManager.Instance.debug_IncreaseSleepTime(10);
+
+    public void OnDebug_IncreaseSleepMin_ButtonClicked() =>
+        GameManager.Instance.debug_IncreaseSleepTime(60);
+
+    public void OnWakeupButtonClicked() => StartCoroutine(WakeupRoutine());
 
     private IEnumerator WakeupRoutine()
     {

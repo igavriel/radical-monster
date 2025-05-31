@@ -849,6 +849,46 @@ PrefabInstance:
       propertyPath: m_text
       value: "\u05DE\u05D7\u05D9\u05E7\u05EA\n\u05DE\u05E9\u05EA\u05DE\u05E9"
       objectReference: {fileID: 0}
+    - target: {fileID: 944058284707347706, guid: 61a3552af148a44549b3ae60c995bd9d, type: 3}
+      propertyPath: m_fontSize
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 944058284707347706, guid: 61a3552af148a44549b3ae60c995bd9d, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.61960787
+      objectReference: {fileID: 0}
+    - target: {fileID: 944058284707347706, guid: 61a3552af148a44549b3ae60c995bd9d, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.6252143
+      objectReference: {fileID: 0}
+    - target: {fileID: 944058284707347706, guid: 61a3552af148a44549b3ae60c995bd9d, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.91764706
+      objectReference: {fileID: 0}
+    - target: {fileID: 944058284707347706, guid: 61a3552af148a44549b3ae60c995bd9d, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 944058284707347706, guid: 61a3552af148a44549b3ae60c995bd9d, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4288585706
+      objectReference: {fileID: 0}
+    - target: {fileID: 1504859599061061142, guid: 61a3552af148a44549b3ae60c995bd9d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -3327971419932107721, guid: 7c8ff58917aad254bbee16daeba7b32b, type: 3}
+    - target: {fileID: 1504859599061061142, guid: 61a3552af148a44549b3ae60c995bd9d, type: 3}
+      propertyPath: m_Color.b
+      value: 0.050980397
+      objectReference: {fileID: 0}
+    - target: {fileID: 1504859599061061142, guid: 61a3552af148a44549b3ae60c995bd9d, type: 3}
+      propertyPath: m_Color.g
+      value: 0.050980452
+      objectReference: {fileID: 0}
+    - target: {fileID: 1504859599061061142, guid: 61a3552af148a44549b3ae60c995bd9d, type: 3}
+      propertyPath: m_Color.r
+      value: 0.5019608
+      objectReference: {fileID: 0}
     - target: {fileID: 2250346831618299693, guid: 61a3552af148a44549b3ae60c995bd9d, type: 3}
       propertyPath: m_SizeDelta.x
       value: 80
@@ -945,29 +985,41 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -4497578210200758736, guid: 578fc686cfcf7b848b77f202915a9e02, type: 3}
+    - target: {fileID: 4035002542831713538, guid: 61a3552af148a44549b3ae60c995bd9d, type: 3}
+      propertyPath: m_Color.b
+      value: 0.61960787
+      objectReference: {fileID: 0}
+    - target: {fileID: 4035002542831713538, guid: 61a3552af148a44549b3ae60c995bd9d, type: 3}
+      propertyPath: m_Color.g
+      value: 0.627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 4035002542831713538, guid: 61a3552af148a44549b3ae60c995bd9d, type: 3}
+      propertyPath: m_Color.r
+      value: 0.91764706
+      objectReference: {fileID: 0}
     - target: {fileID: 6430373815335813040, guid: 61a3552af148a44549b3ae60c995bd9d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6430373815335813040, guid: 61a3552af148a44549b3ae60c995bd9d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6430373815335813040, guid: 61a3552af148a44549b3ae60c995bd9d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2076706042}
+      objectReference: {fileID: 1663483914}
     - target: {fileID: 6430373815335813040, guid: 61a3552af148a44549b3ae60c995bd9d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6430373815335813040, guid: 61a3552af148a44549b3ae60c995bd9d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ShowMessage
+      value: ResetGame
       objectReference: {fileID: 0}
     - target: {fileID: 6430373815335813040, guid: 61a3552af148a44549b3ae60c995bd9d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: SceneButtonManager, Assembly-CSharp
+      value: GameManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6430373815335813040, guid: 61a3552af148a44549b3ae60c995bd9d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
@@ -1109,6 +1161,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 065fc8e9f27984b33a002e746701d758, type: 3}
+--- !u!114 &1663483914 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -1933807876576390578, guid: 065fc8e9f27984b33a002e746701d758, type: 3}
+  m_PrefabInstance: {fileID: 1663483913}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63f947392283e44ed82612607ac0865c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1706581790
 GameObject:
   m_ObjectHideFlags: 0
