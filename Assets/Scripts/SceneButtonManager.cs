@@ -2,43 +2,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public enum SceneName
-{
-    SplashScreen,
-    MainMenu,
-    Settings,
-    StartGame,
-    Sleep,
-    WakeUp,
-    Store,
-}
-
 public class SceneButtonManager : MonoBehaviour
 {
-    private IDictionary<SceneName, string> sceneNames = new Dictionary<SceneName, string>
-    {
-        { SceneName.SplashScreen, "0-splash" },
-        { SceneName.MainMenu, "1-main" },
-        { SceneName.Settings, "2-settings" },
-        { SceneName.StartGame, "3-1-start" },
-        { SceneName.Sleep, "3-2-sleep" },
-        { SceneName.WakeUp, "3-3-wake" },
-        { SceneName.Store, "4-store" },
-    };
-
-    public void LoadScene(SceneName sceneName)
-    {
-        LoadSceneByName(sceneNames[sceneName]);
-    }
-
     public void LoadSceneByName(string sceneName)
     {
+        Debug.Log($"Loading scene: {sceneName}");
         SceneManager.LoadScene(sceneName);
     }
 
     public void QuitGame()
     {
+        Debug.Log("Quitting game...");
+        // If running in the editor, stop playing
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        // If running as a standalone build, quit the application
         Application.Quit();
+#endif
     }
 
     public void ShowMessage(string message)
