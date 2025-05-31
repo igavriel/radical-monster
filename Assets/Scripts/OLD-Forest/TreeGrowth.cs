@@ -2,8 +2,11 @@ using UnityEngine;
 
 public class TreeGrowth : MonoBehaviour
 {
-    [SerializeField] private Sprite[] growthStages; // Drag & drop stage sprites in Inspector
-    [SerializeField] private int currentStage = 0;
+    [SerializeField]
+    private Sprite[] growthStages; // Drag & drop stage sprites in Inspector
+
+    [SerializeField]
+    private int currentStage = 0;
 
     private SpriteRenderer spriteRenderer;
 
@@ -28,5 +31,6 @@ public class TreeGrowth : MonoBehaviour
     }
 
     public int GetStage() => currentStage;
+
     public int MaxStage() => growthStages.Length - 1;
 }

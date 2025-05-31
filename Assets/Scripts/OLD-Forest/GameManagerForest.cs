@@ -2,10 +2,17 @@ using UnityEngine;
 
 public class GameManagerForest : MonoBehaviour
 {
-    [SerializeField] private GameObject treePrefab;
-    [SerializeField] private int treeCount = 10;
-    [SerializeField] private Collider2D spawnArea;
-    [SerializeField] private float spawnPadding = 0.5f; // Padding to keep trees from edges
+    [SerializeField]
+    private GameObject treePrefab;
+
+    [SerializeField]
+    private int treeCount = 10;
+
+    [SerializeField]
+    private Collider2D spawnArea;
+
+    [SerializeField]
+    private float spawnPadding = 0.5f; // Padding to keep trees from edges
 
     void Start()
     {
