@@ -73,8 +73,8 @@ public class GameManager : MonoBehaviour
     void UpdateFlowers()
     {
         int newFlowers = Mathf.FloorToInt(currentSleepTime / flowerWinTimerSeconds);
-        for (int i = 0; i < newFlowers; i++)
-            flowers.Add(new FlowerData(UnityEngine.Random.Range(0, 5), 1));
+//        for (int i = 0; i < newFlowers; i++)
+//            flowers.Add(new FlowerData(UnityEngine.Random.Range(0, 5), 1));
     }
 
     public void SaveProgress()
@@ -83,8 +83,12 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("flowerCount", flowers.Count);
         for (int i = 0; i < flowers.Count; i++)
         {
-            PlayerPrefs.SetInt($"flower_{i}_type", flowers[i].typeIndex);
-            PlayerPrefs.SetInt($"flower_{i}_stage", flowers[i].stage);
+            var data = flowers[i];
+            PlayerPrefs.SetInt($"flower_{i}_type", data.typeIndex);
+            PlayerPrefs.SetInt($"flower_{i}_stage", data.stage);
+            PlayerPrefs.SetFloat($"flower_{i}_x", data.position.x);
+            PlayerPrefs.SetFloat($"flower_{i}_y", data.position.y);
+            PlayerPrefs.SetFloat($"flower_{i}_z", data.position.z);
         }
         PlayerPrefs.Save();
     }
@@ -98,7 +102,14 @@ public class GameManager : MonoBehaviour
         {
             int type = PlayerPrefs.GetInt($"flower_{i}_type");
             int stage = PlayerPrefs.GetInt($"flower_{i}_stage");
-            flowers.Add(new FlowerData(type, stage));
+            float x = PlayerPrefs.GetFloat($"flower_{i}_x");
+            float y = PlayerPrefs.GetFloat($"flower_{i}_y");
+            float z = PlayerPrefs.GetFloat($"flower_{i}_z");
+            Vector3 pos = new Vector3(x, y, z);
+            //GameObject prefab = flowerPrefabs[type];
+            //GameObject flowerObj = Instantiate(prefab, pos, Quaternion.identity, parent);
+            //Flower flower = flowerObj.GetComponent<Flower>();
+            //flower.Initialize(type, stage, pos);
         }
     }
 
@@ -110,18 +121,5 @@ public class GameManager : MonoBehaviour
         accumulatedSleepTime = 0;
         currentSleepTime = 0;
         flowers.Clear();
-    }
-}
-
-[System.Serializable]
-public class FlowerData
-{
-    public int typeIndex;
-    public int stage;
-
-    public FlowerData(int typeIndex, int stage)
-    {
-        this.typeIndex = typeIndex;
-        this.stage = stage;
     }
 }
