@@ -6,11 +6,11 @@ public class MainSceneManager : MonoBehaviour
 {
     public GameObject comicsBalloon;
     public TMP_Text comicsText;
-
     public TMP_Text timerText;
     public TMP_Text summaryText;
+
     public float sleepComicDuration = 2f;
-    public float wakeComicDuration = 2f;
+    public float wakeupComicDuration = 2f;
 
     private MonsterAnimationController monsterController;
 
@@ -38,25 +38,34 @@ public class MainSceneManager : MonoBehaviour
         timerText.text = Util.GetFormattedTime(GameManager.Instance.currentSleepTime);
     }
 
+    public void OnMainScreenPressed() => StartCoroutine(InitializeIdle());
+
+    public void OnGotoSleepPressed() => StartCoroutine(GotoSleepRoutine());
+
+    public void OnWakeupPressed() => StartCoroutine(WakeupRoutine());
+
     private IEnumerator InitializeIdle()
     {
         yield return new WaitForSeconds(0f);
         monsterController.SetStartStateIdle();
     }
 
-    public void OnGotoSleepPressed() => StartCoroutine(GotoSleepRoutine());
-
-    public void OnWakeupButtonClicked() => StartCoroutine(WakeupRoutine());
-
     private IEnumerator GotoSleepRoutine()
     {
         comicsText.text = Util.GetRandomSleepMessage();
-        comicsBalloon.SetActive(true);
         monsterController.ChangeStateToSleep();
 
-        yield return new WaitForSeconds(2f);
-        comicsBalloon.SetActive(false);
+        comicsBalloon.SetActive(true);
+        timerText.gameObject.SetActive(false);
+        summaryText.gameObject.SetActive(false);
         GameManager.Instance.StartSleepSession();
+
+        yield return new WaitForSeconds(sleepComicDuration);
+
+        comicsBalloon.SetActive(false);
+        timerText.gameObject.SetActive(true);
+        summaryText.gameObject.SetActive(false);
+
         monsterController.SetStartStateSleep();
     }
 
@@ -67,13 +76,16 @@ public class MainSceneManager : MonoBehaviour
         comicsText.text = Util.GetRandomWakeMessage();
         comicsBalloon.SetActive(true);
         timerText.gameObject.SetActive(false);
+        summaryText.gameObject.SetActive(false);
 
-        yield return new WaitForSeconds(2f);
-        comicsBalloon.SetActive(false);
-        GameManager.Instance.EndSleepSession();
-        summaryText.gameObject.SetActive(true);
-        monsterController.SetStartStateWakeUp();
+        yield return new WaitForSeconds(wakeupComicDuration);
         buildSummaryText();
+        comicsBalloon.SetActive(false);
+        timerText.gameObject.SetActive(false);
+        summaryText.gameObject.SetActive(true);
+
+        GameManager.Instance.EndSleepSession();
+        monsterController.SetStartStateWakeUp();
     }
 
     private void buildSummaryText()
