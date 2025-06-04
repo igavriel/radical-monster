@@ -44,9 +44,16 @@ public class MainSceneManager : MonoBehaviour
 
     public void OnWakeupPressed() => StartCoroutine(WakeupRoutine());
 
+    public void OnShowGarden()
+    {
+        monsterController.gameObject.SetActive(false);
+    }
+
     private IEnumerator InitializeIdle()
     {
         yield return new WaitForSeconds(0f);
+        GameManager.Instance.LoadProgress();
+        monsterController.gameObject.SetActive(true);
         monsterController.SetStartStateIdle();
     }
 

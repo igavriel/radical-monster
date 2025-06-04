@@ -1,12 +1,11 @@
-using UnityEngine;
 using System.Collections;
-using UnityEngine.SceneManagement;
+using UnityEngine;
 
 public enum GameState
 {
     Main,
     Sleep,
-    Wake
+    Wake,
 }
 
 public class ToolbarManager : MonoBehaviour
@@ -92,46 +91,4 @@ public class ToolbarManager : MonoBehaviour
         }
         toolbar.anchoredPosition = targetPosition;
     }
-
-    private void QuitGame()
-    {
-        Debug.Log("Quitting game...");
-        // If running in the editor, stop playing
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        // If running as a standalone build, quit the application
-        Application.Quit();
-#endif
-    }
-
-    private void LoadSceneByName(string sceneName)
-    {
-        Debug.Log($"Loading scene: {sceneName}");
-        SceneManager.LoadScene(sceneName);
-    }
-
-    public void ShowMessage(string message)
-    {
-        Debug.Log($"Popup Message: {message}");
-        // Alternatively activate a popup UI here
-    }
-
-    public void OnGotoSleepPressed() => SetGameState(GameState.Sleep);
-
-    public void OnStorePressed() => LoadSceneByName("4-store");
-
-    public void OnSettingsPressed() => LoadSceneByName("2-settings");
-
-    public void OnExitPressed() => QuitGame();
-
-    public void OnWakeUpPressed() => SetGameState(GameState.Wake);
-
-    public void OnMainScreenPressed() => SetGameState(GameState.Main);
-
-    public void OnDebug_IncreaseSleepSec_Pressed() =>
-        GameManager.Instance.debug_IncreaseSleepTime(10);
-
-    public void OnDebug_IncreaseSleepMin_Pressed() =>
-        GameManager.Instance.debug_IncreaseSleepTime(60);
 }

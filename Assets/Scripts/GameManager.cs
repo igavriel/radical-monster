@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,6 +14,10 @@ public class GameManager : MonoBehaviour
 
     public int flowerWinTimerSeconds = 60; // seconds to win a flower
     public List<FlowerData> flowers = new();
+
+    public List<GameObject> flowerPrefabs;
+    public Transform flowerParent;
+    public Collider2D flowerSpawnArea;
 
     private bool isSleeping = false;
 
@@ -34,6 +39,8 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log($"Increasing sleep time by {debugAddSeconds} seconds");
             currentSleepTime += debugAddSeconds;
+
+            debug_CreateInitialFlowers();
         }
     }
 
@@ -69,8 +76,8 @@ public class GameManager : MonoBehaviour
     void UpdateFlowers()
     {
         int newFlowers = Mathf.FloorToInt(currentSleepTime / flowerWinTimerSeconds);
-//        for (int i = 0; i < newFlowers; i++)
-//            flowers.Add(new FlowerData(UnityEngine.Random.Range(0, 5), 1));
+        for (int i = 0; i < newFlowers; i++)
+            AddNewRandomFlower();
     }
 
     public void SaveProgress()
@@ -102,10 +109,9 @@ public class GameManager : MonoBehaviour
             float y = PlayerPrefs.GetFloat($"flower_{i}_y");
             float z = PlayerPrefs.GetFloat($"flower_{i}_z");
             Vector3 pos = new Vector3(x, y, z);
-            //GameObject prefab = flowerPrefabs[type];
-            //GameObject flowerObj = Instantiate(prefab, pos, Quaternion.identity, parent);
-            //Flower flower = flowerObj.GetComponent<Flower>();
-            //flower.Initialize(type, stage, pos);
+
+            Flower flower = InitializeFlower(type, stage, pos);
+            flowers.Add(flower.ToData());
         }
     }
 
@@ -117,5 +123,62 @@ public class GameManager : MonoBehaviour
         accumulatedSleepTime = 0;
         currentSleepTime = 0;
         flowers.Clear();
+    }
+
+    public Flower InitializeFlower(int type, int stage, Vector3 position)
+    {
+        Debug.Log("Creating Flower: " + type + " at position: " + position);
+        GameObject flowerObj = Instantiate(
+            flowerPrefabs[type],
+            position,
+            Quaternion.identity,
+            flowerParent
+        );
+        Flower flower = flowerObj.GetComponent<Flower>();
+        flower.Initialize(type, stage, position);
+        return flower;
+    }
+
+    public void AddNewRandomFlower()
+    {
+        int typeIndex = UnityEngine.Random.Range(0, flowerPrefabs.Count);
+        Vector3 position = GetRandomPointInCollider(flowerSpawnArea);
+        Flower flower = InitializeFlower(typeIndex, 1, position);
+        flowers.Add(flower.ToData());
+        SaveProgress();
+    }
+
+    public void debug_CreateInitialFlowers()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            AddNewRandomFlower();
+        }
+        SaveProgress();
+    }
+
+    private Vector3 GetRandomPointInCollider(Collider2D collider)
+    {
+        Bounds bounds = collider.bounds;
+        Vector3 point;
+        do
+        {
+            point = new Vector3(
+                UnityEngine.Random.Range(bounds.min.x, bounds.max.x),
+                UnityEngine.Random.Range(bounds.min.y, bounds.max.y),
+                0f
+            );
+        } while (!collider.OverlapPoint(point));
+        return point;
+    }
+
+    public void IncreaseAllFlowerStages()
+    {
+        for (int i = 0; i < flowers.Count; i++)
+        {
+            var data = flowers[i];
+            data.stage = Mathf.Min(data.stage + 1, 5);
+        }
+        SaveProgress();
     }
 }

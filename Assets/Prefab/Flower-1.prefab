@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1000029226524209241}
-  - component: {fileID: 8871951951400016792}
   - component: {fileID: 3905142470402225036}
   - component: {fileID: 4929728210879688796}
   m_Layer: 0
@@ -34,25 +33,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8871951951400016792
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4429187391274817046}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95c88e81aa2c44a7b9e5886ad6eb74e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  growthStages:
-  - {fileID: 2741108303460153435, guid: 074f6e2bebc68498f898665b9ae386e7, type: 3}
-  - {fileID: 6224667774817038740, guid: 7da2b35d735cd4f5fb62b4be6116a16f, type: 3}
-  - {fileID: 8576460761253200516, guid: b2ae9523b068948588052446971eac11, type: 3}
-  - {fileID: -6736742212530128021, guid: cc634cd9b13c54b77812833b19beae5d, type: 3}
-  - {fileID: 3092210498220820492, guid: 49ee3fd2c1f3e49b78a52f8eb1840836, type: 3}
-  currentStage: 0
 --- !u!114 &3905142470402225036
 MonoBehaviour:
   m_ObjectHideFlags: 0
