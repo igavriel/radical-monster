@@ -50,8 +50,6 @@ public class GameManager : MonoBehaviour
         currentSleepTime = 0;
         lastGameTime = DateTime.Now;
         isSleeping = true;
-
-        SceneManager.LoadScene(Util.SLEEP_SCENE_NAME);
     }
 
     public void StopSleepSession() => isSleeping = false;
@@ -61,8 +59,6 @@ public class GameManager : MonoBehaviour
         accumulatedSleepTime += currentSleepTime;
         UpdateFlowers();
         SaveProgress();
-
-        SceneManager.LoadScene(Util.WAKE_SCENE_NAME);
     }
 
     public bool IsSleeping()
