@@ -108,13 +108,14 @@ public class MainSceneManager : MonoBehaviour
         storePanel.SetActive(false);
 
         yield return new WaitForSeconds(wakeupComicDuration);
+        GameManager.Instance.EndSleepSession();
+
         buildSummaryText();
         comicsBalloon.SetActive(false);
         timerText.gameObject.SetActive(false);
         summaryText.gameObject.SetActive(true);
         storePanel.SetActive(false);
 
-        GameManager.Instance.EndSleepSession();
         monsterController.SetStartStateWakeUp();
     }
 
