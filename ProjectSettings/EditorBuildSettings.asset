@@ -12,10 +12,10 @@ EditorBuildSettings:
     path: Assets/Scenes/1-main.unity
     guid: e2dcab620a65d42dd9f86aed4efac84c
   - enabled: 1
-    path: Assets/Scenes/2-settings.unity
+    path: Assets/Scenes/ZZZ-OLD/2-settings.unity
     guid: a389bb61e3b354e4aaf334e65e6aec7f
   - enabled: 1
-    path: Assets/Scenes/4-store.unity
+    path: Assets/Scenes/ZZZ-OLD/4-store.unity
     guid: 2f72e60b2761c4408a4746a4ccb61271
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 9f3c6ffcaa60540bbac9d75e80d6a5bb, type: 2}

@@ -5,29 +5,10 @@ public class Router : MonoBehaviour
 {
     private string additiveSceneName = string.Empty;
 
-    private void LoadSceneByName(string sceneName, LoadSceneMode mode)
+    private void LoadSceneByName(string sceneName)
     {
-        SceneManager.LoadScene(sceneName, LoadSceneMode.Single);    // force single scene load for now
-        //     Debug.Log($"Loading scene: {sceneName} with mode: {mode}");
-        //     if (mode == LoadSceneMode.Single)
-        //     {
-        //         if (additiveSceneName.Length > 0)
-        //         {
-        //             // Unload the previous additive scene if it exists
-        //             Debug.Log($"Unloading previous additive scene: {additiveSceneName}");
-        //             SceneManager.UnloadSceneAsync(additiveSceneName);
-        //             additiveSceneName = string.Empty;
-        //         }
-        //         else
-        //         {
-        //             SceneManager.LoadScene(sceneName, mode);
-        //         }
-        //     }
-        //     else
-        //     {
-        //         SceneManager.LoadScene(sceneName, mode);
-        //         additiveSceneName = sceneName; // Update the current additive scene name
-        //     }
+        Debug.Log($"Loading scene: {sceneName}");
+        SceneManager.LoadScene(sceneName);
     }
 
     private void QuitGame()
@@ -56,11 +37,21 @@ public class Router : MonoBehaviour
             toolbarManager.SetGameState(GameState.Sleep);
     }
 
-    public void OnStartGameFromSplashPressed() => LoadSceneByName("1-main", LoadSceneMode.Single);
+    public void OnStartGameFromSplashPressed() => LoadSceneByName("1-main");
 
-    public void OnStorePressed() => LoadSceneByName("4-store", LoadSceneMode.Additive);
+    public void OnStorePressed()
+    {
+        ToolbarManager toolbarManager = loadToolbarManager();
+        if (toolbarManager != null)
+            toolbarManager.SetGameState(GameState.Store);
+    }
 
-    public void OnSettingsPressed() => LoadSceneByName("2-settings", LoadSceneMode.Additive);
+    public void OnSettingsPressed()
+    {
+        ToolbarManager toolbarManager = loadToolbarManager();
+        if (toolbarManager != null)
+            toolbarManager.SetGameState(GameState.Settings);
+    }
 
     public void OnExitPressed() => QuitGame();
 

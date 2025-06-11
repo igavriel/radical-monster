@@ -5,6 +5,7 @@ using UnityEngine;
 public class MainSceneManager : MonoBehaviour
 {
     public GameObject comicsBalloon;
+    public GameObject storePanel;
     public TMP_Text comicsText;
     public TMP_Text timerText;
     public TMP_Text summaryText;
@@ -20,6 +21,7 @@ public class MainSceneManager : MonoBehaviour
         Util.AssertObject(comicsText, "Comics Text is not assigned in the inspector.");
         Util.AssertObject(timerText, "Timer Text is not assigned in the inspector.");
         Util.AssertObject(summaryText, "Summary Text is not assigned in the inspector.");
+        Util.AssertObject(storePanel, "Store Panel is not assigned in the inspector.");
 
         monsterController = FindFirstObjectByType<MonsterAnimationController>();
         Util.AssertObject(monsterController, "MonsterAnimationController not found in the scene.");
@@ -28,6 +30,7 @@ public class MainSceneManager : MonoBehaviour
         comicsBalloon.SetActive(false);
         timerText.gameObject.SetActive(false);
         summaryText.gameObject.SetActive(false);
+        storePanel.SetActive(false);
     }
 
     private void Update()
@@ -44,6 +47,17 @@ public class MainSceneManager : MonoBehaviour
 
     public void OnWakeupPressed() => StartCoroutine(WakeupRoutine());
 
+    public void OnStorePressed()
+    {
+        comicsBalloon.SetActive(false);
+        timerText.gameObject.SetActive(false);
+        summaryText.gameObject.SetActive(false);
+        storePanel.SetActive(true);
+        monsterController.gameObject.SetActive(false);
+    }
+
+    public void OnDeleteUserPressed() => GameManager.Instance.ResetGame();
+
     public void OnShowGarden()
     {
         monsterController.gameObject.SetActive(false);
@@ -55,6 +69,11 @@ public class MainSceneManager : MonoBehaviour
         GameManager.Instance.LoadProgress();
         monsterController.gameObject.SetActive(true);
         monsterController.SetStartStateIdle();
+
+        comicsBalloon.SetActive(false);
+        timerText.gameObject.SetActive(false);
+        summaryText.gameObject.SetActive(false);
+        storePanel.SetActive(false);
     }
 
     private IEnumerator GotoSleepRoutine()
@@ -65,6 +84,7 @@ public class MainSceneManager : MonoBehaviour
         comicsBalloon.SetActive(true);
         timerText.gameObject.SetActive(false);
         summaryText.gameObject.SetActive(false);
+        storePanel.SetActive(false);
         GameManager.Instance.StartSleepSession();
 
         yield return new WaitForSeconds(sleepComicDuration);
@@ -72,6 +92,7 @@ public class MainSceneManager : MonoBehaviour
         comicsBalloon.SetActive(false);
         timerText.gameObject.SetActive(true);
         summaryText.gameObject.SetActive(false);
+        storePanel.SetActive(false);
 
         monsterController.SetStartStateSleep();
     }
@@ -84,12 +105,14 @@ public class MainSceneManager : MonoBehaviour
         comicsBalloon.SetActive(true);
         timerText.gameObject.SetActive(false);
         summaryText.gameObject.SetActive(false);
+        storePanel.SetActive(false);
 
         yield return new WaitForSeconds(wakeupComicDuration);
         buildSummaryText();
         comicsBalloon.SetActive(false);
         timerText.gameObject.SetActive(false);
         summaryText.gameObject.SetActive(true);
+        storePanel.SetActive(false);
 
         GameManager.Instance.EndSleepSession();
         monsterController.SetStartStateWakeUp();

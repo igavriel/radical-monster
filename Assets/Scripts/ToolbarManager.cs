@@ -6,6 +6,8 @@ public enum GameState
     Main,
     Sleep,
     Wake,
+    Settings,
+    Store,
 }
 
 public class ToolbarManager : MonoBehaviour
