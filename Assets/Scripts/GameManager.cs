@@ -39,8 +39,6 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log($"Increasing sleep time by {debugAddSeconds} seconds");
             currentSleepTime += debugAddSeconds;
-
-            debug_CreateInitialFlowers();
         }
     }
 
@@ -123,6 +121,11 @@ public class GameManager : MonoBehaviour
         accumulatedSleepTime = 0;
         currentSleepTime = 0;
         flowers.Clear();
+        flowerPrefabs.Clear();
+        foreach (Transform child in flowerParent)
+        {
+            Destroy(child.gameObject);
+        }
     }
 
     public Flower InitializeFlower(int type, int stage, Vector3 position)
