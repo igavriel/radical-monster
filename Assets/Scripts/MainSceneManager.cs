@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Text;
 using TMPro;
 using UnityEngine;
 
@@ -38,10 +39,10 @@ public class MainSceneManager : MonoBehaviour
 
     private void Update()
     {
-        if (!GameManager.Instance.IsSleeping())
+        if (!GameManager.Instance.IsSleeping)
             return;
 
-        timerText.text = Util.GetFormattedTime(GameManager.Instance.gameData.CurrentSleepTime);
+        timerText.text = Util.GetFormattedTime(GameManager.Instance.GameData.LastGameSleepTime);
     }
 
     public void OnMainScreenPressed() => StartCoroutine(InitializeIdle());
@@ -65,7 +66,7 @@ public class MainSceneManager : MonoBehaviour
 
     public void OnToggleDebugMode()
     {
-        bool debugMode = GameManager.Instance.IsDebugMode();
+        bool debugMode = GameManager.Instance.IsDebugMode;
         Debug.Log($"Debug mode toggled: {debugMode}");
         foreach (GameObject obj in debugObjects)
         {
@@ -132,16 +133,6 @@ public class MainSceneManager : MonoBehaviour
 
     private void buildSummaryText()
     {
-        string currentTime = Util.GetFormattedTime(
-            GameManager.Instance.gameData.CurrentSleepTime,
-            true
-        );
-        string totalTime = Util.GetFormattedTime(
-            GameManager.Instance.gameData.AccumulatedSleepTime,
-            true
-        );
-
-        summaryText.text =
-            $"הייתה שינה טובה!\n" + $"זמן שינה: {currentTime}\n" + $"סה״כ זמן שינה: {totalTime}\n";
+        summaryText.text = GameManager.Instance.buildSummaryText();
     }
 }

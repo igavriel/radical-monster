@@ -1,23 +1,21 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    public GameData gameData = new();
-
-    public int flowerWinTimerSeconds = 60; // seconds to win a flower
-    public List<FlowerData> flowers = new();
+    public GameData GameData { get; private set; } = new();
+    public bool IsDebugMode { get; private set; } = false;
+    public bool IsSleeping { get; private set; } = false;
 
     public List<GameObject> flowersTypePrefabs;
     public Transform flowerParent;
     public Collider2D flowerSpawnArea;
 
-    private bool isDebugMode = false;
-
-    private bool isSleeping = false;
+    private List<FlowerData> flowers = new();
 
     void Awake()
     {
@@ -35,56 +33,45 @@ public class GameManager : MonoBehaviour
 
     public void debug_IncreaseSleepTime(int debugAddSeconds)
     {
-        if (isSleeping)
-        {
-            Debug.Log($"Increasing sleep time by {debugAddSeconds} seconds");
-            gameData.IncreaseCurrentSleepTime(debugAddSeconds);
-        }
+        if (!IsSleeping)
+            return;
+
+        Debug.Log($"Increasing sleep time by {debugAddSeconds} seconds");
+        GameData.IncreaseCurrentSleepTime(debugAddSeconds);
     }
 
     void Update()
     {
-        if (isSleeping)
-        {
-            gameData.IncreaseCurrentSleepTime(Time.deltaTime);
-        }
+        if (!IsSleeping)
+            return;
+
+        GameData.IncreaseCurrentSleepTime(Time.deltaTime);
     }
 
     public void StartSleepSession()
     {
-        gameData.StartSleepSession();
-        isSleeping = true;
+        GameData.StartSleepSession();
+        IsSleeping = true;
     }
 
     public void ToggleDebugMode()
     {
-        isDebugMode = !isDebugMode;
-        Debug.Log($"Debug mode is now {(isDebugMode ? "enabled" : "disabled")}");
+        IsDebugMode = !IsDebugMode;
+        Debug.Log($"Debug mode is now {(IsDebugMode ? "enabled" : "disabled")}");
     }
 
-    public bool IsDebugMode()
-    {
-        return isDebugMode;
-    }
-
-    public void StopSleepSession() => isSleeping = false;
+    public void StopSleepSession() => IsSleeping = false;
 
     public void EndSleepSession()
     {
-
-        gameData.EndSleepSession();
+        GameData.EndSleepSession();
         UpdateFlowers();
         SaveProgress();
     }
 
-    public bool IsSleeping()
-    {
-        return isSleeping;
-    }
-
     void UpdateFlowers()
     {
-        int newFlowers = gameData.GetAmountOfFlowers();
+        int newFlowers = GameData.GetAmountOfFlowers();
         for (int i = 0; i < newFlowers; i++)
         {
             AddNewRandomFlower();
@@ -96,7 +83,7 @@ public class GameManager : MonoBehaviour
         // Save game data to persistent storage (e.g., PlayerPrefs, file, etc.)
         // This is a placeholder for actual saving logic
         Debug.Log("Saving game progress...");
-        gameData.SaveProgress();
+        GameData.SaveProgress();
         PlayerPrefs.SetInt("flowerCount", flowers.Count);
         for (int i = 0; i < flowers.Count; i++)
         {
@@ -115,7 +102,7 @@ public class GameManager : MonoBehaviour
         // Load game data from persistent storage (e.g., PlayerPrefs, file, etc.)
         // This is a placeholder for actual loading logic
         Debug.Log("Loading game progress...");
-        gameData.LoadProgress();
+        GameData.LoadProgress();
         int count = PlayerPrefs.GetInt("flowerCount", 0);
         flowers.Clear();
         for (int i = 0; i < count; i++)
@@ -137,7 +124,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Resetting game progress");
 
         PlayerPrefs.DeleteAll();
-        gameData.Reset();
+        GameData.Reset();
         flowers.Clear();
         foreach (Transform child in flowerParent)
         {
@@ -207,5 +194,22 @@ public class GameManager : MonoBehaviour
             flowers.Add(flowerComponent.ToData());
         }
         SaveProgress();
+    }
+
+    public string buildSummaryText()
+    {
+        string currentTime = Util.GetFormattedTime(GameData.LastGameSleepTime, true);
+        string totalTime = Util.GetFormattedTime(GameData.TotalSleepTime, true);
+
+        StringBuilder sb = new StringBuilder();
+        sb.AppendLine("סיכום שינה:");
+        sb.AppendLine($"זמן שינה שנצבר: {currentTime}");
+        sb.AppendLine($"סה״כ זמן שינה: {totalTime}");
+        sb.AppendLine($"אסימונים שנצברו: {GameData.LastGameTokens}");
+        sb.AppendLine($"סה״כ אסימונים: {GameData.TotalTokens}");
+        sb.AppendLine($"פרחים שנצברו: {flowers.Count}");
+        sb.AppendLine($"סה״כ פרחים: {GameData.GetAmountOfFlowers()}");
+
+        return sb.ToString();
     }
 }
