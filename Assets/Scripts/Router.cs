@@ -73,9 +73,11 @@ public class Router : MonoBehaviour
 
     public void OnCreateNewFlowersPressed() => GameManager.Instance.AddNewRandomFlower();
 
-    public void OnDebug_IncreaseSleepSec_Pressed() =>
-        GameManager.Instance.debug_IncreaseSleepTime(10);
+    public void OnDebug_GrowGarden_Pressed() => GameManager.Instance.IncreaseAllFlowerStages();
 
-    public void OnDebug_IncreaseSleepMin_Pressed() =>
-        GameManager.Instance.debug_IncreaseSleepTime(60);
+    public void OnDebug_IncreaseSleepTime_Pressed()
+    {
+        int time = Random.Range(10, 600);
+        GameManager.Instance.debug_IncreaseSleepTime(time);
+    }
 }

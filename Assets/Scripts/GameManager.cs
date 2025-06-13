@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public int flowerWinTimerSeconds = 60; // seconds to win a flower
     public List<FlowerData> flowers = new();
 
-    public List<GameObject> flowerPrefabs;
+    public List<GameObject> flowersTypePrefabs;
     public Transform flowerParent;
     public Collider2D flowerSpawnArea;
 
@@ -85,7 +85,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < flowers.Count; i++)
         {
             var data = flowers[i];
-            PlayerPrefs.SetInt($"flower_{i}_type", data.typeIndex);
+            PlayerPrefs.SetInt($"flower_{i}_type", data.flowerType);
             PlayerPrefs.SetInt($"flower_{i}_stage", data.stage);
             PlayerPrefs.SetFloat($"flower_{i}_x", data.position.x);
             PlayerPrefs.SetFloat($"flower_{i}_y", data.position.y);
@@ -121,18 +121,15 @@ public class GameManager : MonoBehaviour
         accumulatedSleepTime = 0;
         currentSleepTime = 0;
         flowers.Clear();
-        flowerPrefabs.Clear();
         foreach (Transform child in flowerParent)
-        {
             Destroy(child.gameObject);
-        }
     }
 
     public Flower InitializeFlower(int type, int stage, Vector3 position)
     {
         Debug.Log("Creating Flower: " + type + " at position: " + position);
         GameObject flowerObj = Instantiate(
-            flowerPrefabs[type],
+            flowersTypePrefabs[type],
             position,
             Quaternion.identity,
             flowerParent
@@ -144,19 +141,10 @@ public class GameManager : MonoBehaviour
 
     public void AddNewRandomFlower()
     {
-        int typeIndex = UnityEngine.Random.Range(0, flowerPrefabs.Count);
+        int flowerTypeIndex = UnityEngine.Random.Range(0, flowersTypePrefabs.Count);
         Vector3 position = GetRandomPointInCollider(flowerSpawnArea);
-        Flower flower = InitializeFlower(typeIndex, 1, position);
+        Flower flower = InitializeFlower(flowerTypeIndex, 0, position);
         flowers.Add(flower.ToData());
-        SaveProgress();
-    }
-
-    public void debug_CreateInitialFlowers()
-    {
-        for (int i = 0; i < 10; i++)
-        {
-            AddNewRandomFlower();
-        }
         SaveProgress();
     }
 
@@ -177,10 +165,24 @@ public class GameManager : MonoBehaviour
 
     public void IncreaseAllFlowerStages()
     {
-        for (int i = 0; i < flowers.Count; i++)
+        // clear the current list and build it again from the scene
+        flowers.Clear();
+        foreach (Transform child in flowerParent)
         {
-            var data = flowers[i];
-            data.stage = Mathf.Min(data.stage + 1, 5);
+            if (!child.TryGetComponent<Flower>(out var flowerComponent))
+            {
+                Debug.LogWarning("Child does not have a Flower component, skipping.");
+                continue;
+            }
+            if (flowerComponent.stage >= 5)
+            {
+                Debug.LogWarning("Flower is already at max stage, skipping.");
+                continue;
+            }
+            Debug.Log($"Increasing stage for flower of type {flowerComponent.flowerType} from {flowerComponent.stage} to {flowerComponent.stage + 1}");
+            flowerComponent.SetNextStage();
+            // Update the flower data
+            flowers.Add(flowerComponent.ToData());
         }
         SaveProgress();
     }

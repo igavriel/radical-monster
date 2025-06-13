@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3905142470402225036}
   - component: {fileID: 4929728210879688796}
   m_Layer: 0
-  m_Name: Flower-1
+  m_Name: Flower-2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,11 +48,11 @@ MonoBehaviour:
   flowerType: 0
   stage: 1
   stageSprites:
-  - {fileID: 2741108303460153435, guid: 074f6e2bebc68498f898665b9ae386e7, type: 3}
-  - {fileID: 6224667774817038740, guid: 7da2b35d735cd4f5fb62b4be6116a16f, type: 3}
-  - {fileID: 8576460761253200516, guid: b2ae9523b068948588052446971eac11, type: 3}
-  - {fileID: -6736742212530128021, guid: cc634cd9b13c54b77812833b19beae5d, type: 3}
-  - {fileID: 3092210498220820492, guid: 49ee3fd2c1f3e49b78a52f8eb1840836, type: 3}
+  - {fileID: -6367837219966448765, guid: 375a132719b8f114aadcfda6bf62f8b1, type: 3}
+  - {fileID: -3989417037294542392, guid: dc095ce8d2086f541bd26c7e3a71ef12, type: 3}
+  - {fileID: -4636115958458729934, guid: 55b1b7c646982a049b43cadc6fe191fa, type: 3}
+  - {fileID: 5248415023898783801, guid: cbf58c37249d82a4e97598dfc07d9058, type: 3}
+  - {fileID: -3338749442709606003, guid: 93978dcbff65c754c82f146ed36c1c45, type: 3}
 --- !u!212 &4929728210879688796
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -97,7 +97,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 2741108303460153435, guid: 074f6e2bebc68498f898665b9ae386e7, type: 3}
+  m_Sprite: {fileID: 568448789392362856, guid: 6e218b04a5fa9ed4fa40b687eaeff8cc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

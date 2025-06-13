@@ -44,3 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63f947392283e44ed82612607ac0865c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentSleepTime: 0
+  accumulatedSleepTime: 0
+  flowerWinTimerSeconds: 60
+  flowers: []
+  flowersTypePrefabs:
+  - {fileID: 4429187391274817046, guid: ab602c232354c4fc9af9cfffd4f742e6, type: 3}
+  flowerParent: {fileID: 0}
+  flowerSpawnArea: {fileID: 0}

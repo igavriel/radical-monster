@@ -2,12 +2,14 @@ using UnityEngine;
 
 public class Flower : MonoBehaviour
 {
-    [SerializeField]
-    [Range(0, 4)]
-    public int typeIndex;
+    readonly int MAX_STAGE = 4; // Maximum growth stage
 
     [SerializeField]
-    [Range(1, 5)]
+    [Range(0, 4)]
+    public int flowerType;
+
+    [SerializeField]
+    [Range(0, 4)]
     public int stage;
 
     [SerializeField]
@@ -15,26 +17,46 @@ public class Flower : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
 
-    void Awake()
+    private void Start()
     {
+        if (stageSprites == null)
+        {
+            Debug.LogError("Stage sprites not set or incorrect length. Expected 5 sprites.");
+            return;
+        }
         spriteRenderer = GetComponent<SpriteRenderer>();
+        Util.AssertObject(spriteRenderer, "SpriteRenderer component not found on Flower object.");
+        Debug.Log("Flower Start method called. Initializing flower...");
+        SetStage(stage); // Initialize with the current stage
+        Debug.Log($"Flower initialized with type {flowerType} at stage {stage}");
     }
 
     public void SetStage(int newStage)
     {
-        stage = Mathf.Clamp(newStage, 1, 5);
-        spriteRenderer.sprite = stageSprites[stage - 1];
+        Debug.Log($"Setting flower stage from {stage} to {newStage}");
+        int nextStage = Mathf.Clamp(newStage, 0, MAX_STAGE);
+        if (nextStage == stage)
+            return; // Already at this stage
+
+        Util.AssertObject(spriteRenderer, "SpriteRenderer component not found on Flower object. Cannot set stage.");
+        spriteRenderer.sprite = stageSprites[stage];
     }
 
-    public void Initialize(int type, int startStage, Vector3 position)
+    public void SetNextStage()
     {
-        typeIndex = type;
-        transform.position = position;
+        SetStage(stage + 1);
+    }
+
+    public void Initialize(int flowerType, int startStage, Vector3 position)
+    {
+        Debug.Log($"Initializing flower of type {flowerType} at stage {startStage} at position {position}");
+        this.flowerType = flowerType;
+        this.transform.position = position;
         SetStage(startStage);
     }
 
     public FlowerData ToData()
     {
-        return new FlowerData(typeIndex, stage, transform.position);
+        return new FlowerData(flowerType, stage, transform.position);
     }
 }
