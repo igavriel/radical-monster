@@ -25,18 +25,26 @@ public class Flower : MonoBehaviour
             return;
         }
         spriteRenderer = GetComponent<SpriteRenderer>();
-        Util.AssertObject(spriteRenderer, "Start: SpriteRenderer component not found on Flower object.");
+        Util.AssertObject(
+            spriteRenderer,
+            "Start: SpriteRenderer component not found on Flower object."
+        );
         SetStage(stage);
     }
 
     public void Initialize(int flowerType, int startStage, Vector3 position)
     {
-        Debug.Log($"Initializing flower of type {flowerType} at stage {startStage} at position {position}");
+        Debug.Log(
+            $"Initializing flower of type {flowerType} at stage {startStage} at position {position}"
+        );
         this.flowerType = flowerType;
         stage = startStage;
         transform.position = position;
         spriteRenderer = GetComponent<SpriteRenderer>();
-        Util.AssertObject(spriteRenderer, "Initialize: SpriteRenderer component not found on Flower object.");
+        Util.AssertObject(
+            spriteRenderer,
+            "Initialize: SpriteRenderer component not found on Flower object."
+        );
         SetStage(stage);
     }
 
@@ -44,7 +52,10 @@ public class Flower : MonoBehaviour
     {
         if (!spriteRenderer)
         {
-            Debug.LogError($"SetStage: SpriteRenderer component not found. Cannot set stage - {gameObject.ToString()}.");
+            Debug.LogError(
+                $"SetStage: SpriteRenderer component not found. Cannot set stage - {gameObject.ToString()}"
+            );
+
             return;
         }
         Debug.Log($"SetStage: Setting flower stage from {stage} to {newStage}");

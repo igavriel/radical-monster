@@ -28,12 +28,16 @@ public class WakeSceneManager : MonoBehaviour
 
     private void buildSummaryText()
     {
-        string currentTime = Util.GetFormattedTime(GameManager.Instance.currentSleepTime, true);
-        string totalTime = Util.GetFormattedTime(GameManager.Instance.accumulatedSleepTime, true);
+        string currentTime = Util.GetFormattedTime(
+            GameManager.Instance.gameData.CurrentSleepTime,
+            true
+        );
+        string totalTime = Util.GetFormattedTime(
+            GameManager.Instance.gameData.AccumulatedSleepTime,
+            true
+        );
 
         summaryText.text =
-            $"הייתה שינה טובה!\n" +
-            $"זמן שינה: {currentTime}\n" +
-            $"סה״כ זמן שינה: {totalTime}\n";
+            $"הייתה שינה טובה!\n" + $"זמן שינה: {currentTime}\n" + $"סה״כ זמן שינה: {totalTime}\n";
     }
 }

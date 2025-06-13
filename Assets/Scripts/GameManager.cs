@@ -1,16 +1,12 @@
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    public float currentSleepTime;
-    public float accumulatedSleepTime;
-    public DateTime lastGameTime;
+    public GameData gameData = new();
 
     public int flowerWinTimerSeconds = 60; // seconds to win a flower
     public List<FlowerData> flowers = new();
@@ -42,7 +38,7 @@ public class GameManager : MonoBehaviour
         if (isSleeping)
         {
             Debug.Log($"Increasing sleep time by {debugAddSeconds} seconds");
-            currentSleepTime += debugAddSeconds;
+            gameData.IncreaseCurrentSleepTime(debugAddSeconds);
         }
     }
 
@@ -50,14 +46,13 @@ public class GameManager : MonoBehaviour
     {
         if (isSleeping)
         {
-            currentSleepTime += Time.deltaTime;
+            gameData.IncreaseCurrentSleepTime(Time.deltaTime);
         }
     }
 
     public void StartSleepSession()
     {
-        currentSleepTime = 0;
-        lastGameTime = DateTime.Now;
+        gameData.StartSleepSession();
         isSleeping = true;
     }
 
@@ -76,7 +71,8 @@ public class GameManager : MonoBehaviour
 
     public void EndSleepSession()
     {
-        accumulatedSleepTime += currentSleepTime;
+
+        gameData.EndSleepSession();
         UpdateFlowers();
         SaveProgress();
     }
@@ -88,7 +84,7 @@ public class GameManager : MonoBehaviour
 
     void UpdateFlowers()
     {
-        int newFlowers = Mathf.FloorToInt(currentSleepTime / flowerWinTimerSeconds);
+        int newFlowers = gameData.GetAmountOfFlowers();
         for (int i = 0; i < newFlowers; i++)
         {
             AddNewRandomFlower();
@@ -97,7 +93,10 @@ public class GameManager : MonoBehaviour
 
     public void SaveProgress()
     {
-        PlayerPrefs.SetFloat("accumulatedSleepTime", accumulatedSleepTime);
+        // Save game data to persistent storage (e.g., PlayerPrefs, file, etc.)
+        // This is a placeholder for actual saving logic
+        Debug.Log("Saving game progress...");
+        gameData.SaveProgress();
         PlayerPrefs.SetInt("flowerCount", flowers.Count);
         for (int i = 0; i < flowers.Count; i++)
         {
@@ -113,7 +112,10 @@ public class GameManager : MonoBehaviour
 
     public void LoadProgress()
     {
-        accumulatedSleepTime = PlayerPrefs.GetFloat("accumulatedSleepTime", 0);
+        // Load game data from persistent storage (e.g., PlayerPrefs, file, etc.)
+        // This is a placeholder for actual loading logic
+        Debug.Log("Loading game progress...");
+        gameData.LoadProgress();
         int count = PlayerPrefs.GetInt("flowerCount", 0);
         flowers.Clear();
         for (int i = 0; i < count; i++)
@@ -135,8 +137,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Resetting game progress");
 
         PlayerPrefs.DeleteAll();
-        accumulatedSleepTime = 0;
-        currentSleepTime = 0;
+        gameData.Reset();
         flowers.Clear();
         foreach (Transform child in flowerParent)
         {
@@ -198,7 +199,9 @@ public class GameManager : MonoBehaviour
                 Debug.LogWarning("Flower is already at max stage, skipping.");
                 continue;
             }
-            Debug.Log($"Increasing stage for flower of type {flowerComponent.flowerType} from {flowerComponent.stage} to {flowerComponent.stage + 1}");
+            Debug.Log(
+                $"Increasing stage for flower of type {flowerComponent.flowerType} from {flowerComponent.stage} to {flowerComponent.stage + 1}"
+            );
             flowerComponent.SetNextStage();
             // Update the flower data
             flowers.Add(flowerComponent.ToData());

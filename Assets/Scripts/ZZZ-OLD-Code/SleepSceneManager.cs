@@ -35,7 +35,7 @@ public class SleepSceneManager : MonoBehaviour
         if (!GameManager.Instance.IsSleeping())
             return;
 
-        timerText.text = Util.GetFormattedTime(GameManager.Instance.currentSleepTime);
+        timerText.text = Util.GetFormattedTime(GameManager.Instance.gameData.CurrentSleepTime);
     }
 
     public void OnDebug_IncreaseSleepSec_ButtonClicked() =>
