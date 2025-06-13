@@ -25,34 +25,36 @@ public class Flower : MonoBehaviour
             return;
         }
         spriteRenderer = GetComponent<SpriteRenderer>();
-        Util.AssertObject(spriteRenderer, "SpriteRenderer component not found on Flower object.");
-        Debug.Log("Flower Start method called. Initializing flower...");
-        SetStage(stage); // Initialize with the current stage
-        Debug.Log($"Flower initialized with type {flowerType} at stage {stage}");
-    }
-
-    public void SetStage(int newStage)
-    {
-        Debug.Log($"Setting flower stage from {stage} to {newStage}");
-        int nextStage = Mathf.Clamp(newStage, 0, MAX_STAGE);
-        if (nextStage == stage)
-            return; // Already at this stage
-
-        Util.AssertObject(spriteRenderer, "SpriteRenderer component not found on Flower object. Cannot set stage.");
-        spriteRenderer.sprite = stageSprites[stage];
-    }
-
-    public void SetNextStage()
-    {
-        SetStage(stage + 1);
+        Util.AssertObject(spriteRenderer, "Start: SpriteRenderer component not found on Flower object.");
+        SetStage(stage);
     }
 
     public void Initialize(int flowerType, int startStage, Vector3 position)
     {
         Debug.Log($"Initializing flower of type {flowerType} at stage {startStage} at position {position}");
         this.flowerType = flowerType;
-        this.transform.position = position;
-        SetStage(startStage);
+        stage = startStage;
+        transform.position = position;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        Util.AssertObject(spriteRenderer, "Initialize: SpriteRenderer component not found on Flower object.");
+        SetStage(stage);
+    }
+
+    public void SetStage(int newStage)
+    {
+        if (!spriteRenderer)
+        {
+            Debug.LogError($"SetStage: SpriteRenderer component not found. Cannot set stage - {gameObject.ToString()}.");
+            return;
+        }
+        Debug.Log($"SetStage: Setting flower stage from {stage} to {newStage}");
+        stage = Mathf.Clamp(newStage, 0, MAX_STAGE);
+        spriteRenderer.sprite = stageSprites[stage];
+    }
+
+    public void SetNextStage()
+    {
+        SetStage(stage + 1);
     }
 
     public FlowerData ToData()

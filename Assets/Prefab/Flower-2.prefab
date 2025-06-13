@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8ad0ede7fa024130a5d049e7f2eaf9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flowerType: 0
+  flowerType: 1
   stage: 1
   stageSprites:
   - {fileID: -6367837219966448765, guid: 375a132719b8f114aadcfda6bf62f8b1, type: 3}
