@@ -69,6 +69,8 @@ public class Router : MonoBehaviour
             toolbarManager.SetGameState(GameState.Main);
     }
 
+    public void OnDebugModePressed() => GameManager.Instance.ToggleDebugMode();
+
     public void OnDeleteUserButtonClicked() => GameManager.Instance.ResetGame();
 
     public void OnCreateNewFlowersPressed() => GameManager.Instance.AddNewRandomFlower();

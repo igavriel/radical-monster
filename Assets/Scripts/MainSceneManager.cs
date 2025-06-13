@@ -10,6 +10,8 @@ public class MainSceneManager : MonoBehaviour
     public TMP_Text timerText;
     public TMP_Text summaryText;
 
+    public GameObject[] debugObjects;
+
     public float sleepComicDuration = 2f;
     public float wakeupComicDuration = 2f;
 
@@ -31,6 +33,7 @@ public class MainSceneManager : MonoBehaviour
         timerText.gameObject.SetActive(false);
         summaryText.gameObject.SetActive(false);
         storePanel.SetActive(false);
+        OnToggleDebugMode();
     }
 
     private void Update()
@@ -61,6 +64,17 @@ public class MainSceneManager : MonoBehaviour
     public void OnShowGarden()
     {
         monsterController.gameObject.SetActive(false);
+    }
+
+    public void OnToggleDebugMode()
+    {
+        bool debugMode = GameManager.Instance.IsDebugMode();
+        Debug.Log($"Debug mode toggled: {debugMode}");
+        foreach (GameObject obj in debugObjects)
+        {
+            Debug.Log($"Setting debug object {obj.name} active state to {debugMode}");
+            obj.SetActive(debugMode);
+        }
     }
 
     private IEnumerator InitializeIdle()

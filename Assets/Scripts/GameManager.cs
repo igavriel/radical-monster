@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     public Transform flowerParent;
     public Collider2D flowerSpawnArea;
 
+    private bool isDebugMode = false;
+
     private bool isSleeping = false;
 
     void Awake()
@@ -30,7 +32,9 @@ public class GameManager : MonoBehaviour
             LoadProgress();
         }
         else
+        {
             Destroy(gameObject);
+        }
     }
 
     public void debug_IncreaseSleepTime(int debugAddSeconds)
@@ -57,6 +61,17 @@ public class GameManager : MonoBehaviour
         isSleeping = true;
     }
 
+    public void ToggleDebugMode()
+    {
+        isDebugMode = !isDebugMode;
+        Debug.Log($"Debug mode is now {(isDebugMode ? "enabled" : "disabled")}");
+    }
+
+    public bool IsDebugMode()
+    {
+        return isDebugMode;
+    }
+
     public void StopSleepSession() => isSleeping = false;
 
     public void EndSleepSession()
@@ -75,7 +90,9 @@ public class GameManager : MonoBehaviour
     {
         int newFlowers = Mathf.FloorToInt(currentSleepTime / flowerWinTimerSeconds);
         for (int i = 0; i < newFlowers; i++)
+        {
             AddNewRandomFlower();
+        }
     }
 
     public void SaveProgress()
@@ -122,7 +139,9 @@ public class GameManager : MonoBehaviour
         currentSleepTime = 0;
         flowers.Clear();
         foreach (Transform child in flowerParent)
+        {
             Destroy(child.gameObject);
+        }
     }
 
     public Flower InitializeFlower(int type, int stage, Vector3 position)
