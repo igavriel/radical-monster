@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using UnityEngine;
 
 [System.Serializable]
@@ -6,7 +7,7 @@ public class GameData
 {
     private const int MINUTES_TO_TOKEN = 10; // 10 minutes = 1 token
     private const int SESSION_TOKENS = 100; // Tokens earned per session
-    private const int MINIMUM_SESSION_TIME = 60 * 60; // 60 minutes minimum session time
+    private const int MINIMUM_SESSION_TIME = 30 * 60; // 30 minutes minimum session time
     private const int SECONDS_PER_FLOWER = 10 * 60; // 10 minutes to win a flower
 
     public float LastGameSleepTime { get; private set; } = 0f;
@@ -51,10 +52,13 @@ public class GameData
         }
         TotalTokens += LastGameTokens;
 
-        Debug.Log(
-            $"Session ended: Tokens: {LastGameTokens}, Total Tokens: {TotalTokens}, " +
-            $"Sleep Time: {LastGameSleepTime} seconds, Total Sleep Time: {TotalSleepTime} seconds"
-        );
+        StringBuilder debugMessage = new StringBuilder();
+        debugMessage.Append($"Session from {LastGameDate.ToString("o")} ended: ");
+        debugMessage.Append($"Tokens earned this session: {LastGameTokens} ");
+        debugMessage.Append($"Total tokens: {TotalTokens} ");
+        debugMessage.Append($"Last game sleep time: {LastGameSleepTime} seconds ");
+        debugMessage.Append($"Total sleep time: {TotalSleepTime} seconds ");
+        Debug.Log(debugMessage.ToString());
     }
 
     public int CalculateLastGameTokens()
@@ -81,7 +85,10 @@ public class GameData
         TotalSleepTime = PlayerPrefs.GetFloat("accumulatedSleepTime", 0);
         TotalTokens = PlayerPrefs.GetInt("totalTokens", 0);
         LastGameSleepTime = PlayerPrefs.GetFloat("lastGameSleepTime", 0);
-        string lastGameDateString = PlayerPrefs.GetString("lastGameDate", DateTime.Now.ToString("o"));
+        string lastGameDateString = PlayerPrefs.GetString(
+            "lastGameDate",
+            DateTime.Now.ToString("o")
+        );
         if (DateTime.TryParse(lastGameDateString, out DateTime parsedDate))
         {
             LastGameDate = parsedDate;

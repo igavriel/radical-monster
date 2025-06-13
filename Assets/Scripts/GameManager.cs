@@ -205,10 +205,20 @@ public class GameManager : MonoBehaviour
         sb.AppendLine("סיכום שינה:");
         sb.AppendLine($"זמן שינה שנצבר: {currentTime}");
         sb.AppendLine($"סה״כ זמן שינה: {totalTime}");
-        sb.AppendLine($"אסימונים שנצברו: {GameData.LastGameTokens}");
-        sb.AppendLine($"סה״כ אסימונים: {GameData.TotalTokens}");
-        sb.AppendLine($"פרחים שנצברו: {flowers.Count}");
-        sb.AppendLine($"סה״כ פרחים: {GameData.GetAmountOfFlowers()}");
+        sb.AppendLine($"אסימונים שנצברו: {Util.reverseString(GameData.LastGameTokens.ToString())}");
+        sb.AppendLine($"סה״כ אסימונים: {Util.reverseString(GameData.TotalTokens.ToString())}");
+        sb.AppendLine($"פרחים שנצברו: {Util.reverseString(GameData.GetAmountOfFlowers().ToString())}");
+        sb.AppendLine($"סה״כ פרחים: {Util.reverseString(flowers.Count.ToString())}");
+
+        return sb.ToString();
+    }
+
+    public string buildScoreText()
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.Append($"אסימונים: {Util.reverseString(GameData.TotalTokens.ToString())} | ");
+        sb.Append($"פרחים: {Util.reverseString(flowers.Count.ToString())} | ");
+        sb.Append($"זמן שינה: {Util.GetFormattedTime(GameData.TotalSleepTime, true)}");
 
         return sb.ToString();
     }

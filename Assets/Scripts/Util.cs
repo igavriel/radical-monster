@@ -54,7 +54,7 @@ public static class Util
         return formattedTime;
     }
 
-    private static string reverseString(string input)
+    public static string reverseString(string input)
     {
         char[] charArray = input.ToCharArray();
         System.Array.Reverse(charArray);

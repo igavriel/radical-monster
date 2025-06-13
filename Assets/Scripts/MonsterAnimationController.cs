@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum State
+public enum MonsterState
 {
     Idle,
     Sleep,
@@ -10,7 +10,7 @@ public enum State
 public class MonsterAnimationController : MonoBehaviour
 {
     private Animator animator;
-    private State currentState = State.Idle;
+    private MonsterState monsterState = MonsterState.Idle;
 
     void Start()
     {
@@ -21,45 +21,45 @@ public class MonsterAnimationController : MonoBehaviour
     public void SetStartStateIdle()
     {
         animator.Play("Idle_Wake_Sad");
-        currentState = State.Idle;
+        monsterState = MonsterState.Idle;
     }
 
     public void SetStartStateSleep()
     {
         animator.Play("Idle_Sleep");
-        currentState = State.Sleep;
+        monsterState = MonsterState.Sleep;
     }
 
     public void SetStartStateWakeUp()
     {
         animator.Play("Idle_Wake_Happy");
-        currentState = State.WakeUp;
+        monsterState = MonsterState.WakeUp;
     }
 
     public void ChangeStateToIdle()
     {
-        switch (currentState)
+        switch (monsterState)
         {
-            case State.Sleep:
+            case MonsterState.Sleep:
                 ChangeStateToWakeUp();
                 ChangeStateToIdle();
                 break;
-            case State.WakeUp:
+            case MonsterState.WakeUp:
                 animator.SetTrigger("idle");
-                currentState = State.Idle;
+                monsterState = MonsterState.Idle;
                 break;
         }
     }
 
     public void ChangeStateToSleep()
     {
-        switch (currentState)
+        switch (monsterState)
         {
-            case State.Idle:
+            case MonsterState.Idle:
                 animator.SetTrigger("gotoSleep");
-                currentState = State.Sleep;
+                monsterState = MonsterState.Sleep;
                 break;
-            case State.WakeUp:
+            case MonsterState.WakeUp:
                 ChangeStateToIdle();
                 ChangeStateToSleep();
                 break;
@@ -68,15 +68,15 @@ public class MonsterAnimationController : MonoBehaviour
 
     public void ChangeStateToWakeUp()
     {
-        switch (currentState)
+        switch (monsterState)
         {
-            case State.Idle:
+            case MonsterState.Idle:
                 ChangeStateToSleep();
                 ChangeStateToWakeUp();
                 break;
-            case State.Sleep:
+            case MonsterState.Sleep:
                 animator.SetTrigger("wakeUp");
-                currentState = State.WakeUp;
+                monsterState = MonsterState.WakeUp;
                 break;
         }
     }
