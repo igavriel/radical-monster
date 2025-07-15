@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 8b79dfb8fdcbf4919aae43e88b2ebae6
+guid: e9fcfe160f4f145b2b15574400d336d0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4597436970944649126
-    second: sad_0
+      213: 4156931976979398421
+    second: radikoli_sleep_156_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sad_0
+      name: radikoli_sleep_156_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 401
-        height: 881
+        x: 36
+        y: 28
+        width: 593
+        height: 539
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a58a895ee6f9230c0800000000000000
-      internalID: -4597436970944649126
+      spriteID: 51fb153db9360b930800000000000000
+      internalID: 4156931976979398421
       vertices: []
       indices: 
       edges: []
@@ -151,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -160,7 +160,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      radikoli_sleep_156_0: 4156931976979398421
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

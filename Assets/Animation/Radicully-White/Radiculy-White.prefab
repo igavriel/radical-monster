@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1160214335426167166}
   - component: {fileID: 6104258699143338645}
   m_Layer: 0
-  m_Name: Radiculy
+  m_Name: Radiculy-White
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.6412365, y: 0.38525903, z: -4.050824}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7882305c8b5d54ad6b3ef3b3f1d2bf7c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8cde63a528bf5400bbd0978e58759177, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,7 +99,7 @@ Animator:
   m_GameObject: {fileID: 3361786780790888694}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1da5e9e37ce1a4e63bb461546986fdb5, type: 2}
+  m_Controller: {fileID: 9100000, guid: 05abee2042f1248959a417a89868e4f3, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
