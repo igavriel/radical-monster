@@ -5,7 +5,6 @@ public class Flower : MonoBehaviour
     readonly int MAX_STAGE = 4; // Maximum growth stage
 
     [SerializeField]
-    [Range(0, 4)]
     public int flowerType;
 
     [SerializeField]

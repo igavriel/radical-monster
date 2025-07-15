@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8ad0ede7fa024130a5d049e7f2eaf9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flowerType: 0
-  stage: 1
+  flowerType: 9
+  stage: 0
   stageSprites:
   - {fileID: 4139197499095660314, guid: caa11dc64c8e44ee399d9bc1ea7b609b, type: 3}
   - {fileID: 3871028769138858490, guid: d09662b6c53fe4ab2bf7b086443d3fd7, type: 3}
