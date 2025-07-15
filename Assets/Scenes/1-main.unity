@@ -4131,6 +4131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   comicsBalloon: {fileID: 64907570}
   storePanel: {fileID: 624755783}
+  gardenPanel: {fileID: 1384409802}
   comicsText: {fileID: 2006504131}
   timerText: {fileID: 1111414329}
   summaryText: {fileID: 95267041}

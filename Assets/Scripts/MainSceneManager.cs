@@ -7,6 +7,7 @@ public class MainSceneManager : MonoBehaviour
 {
     public GameObject comicsBalloon;
     public GameObject storePanel;
+    public GameObject gardenPanel;
     public TMP_Text comicsText;
     public TMP_Text timerText;
     public TMP_Text summaryText;
@@ -18,6 +19,7 @@ public class MainSceneManager : MonoBehaviour
     public float wakeupComicDuration = 2f;
 
     private MonsterAnimationController monsterController;
+    private bool isMonsterShown = true;
 
     private void Start()
     {
@@ -26,6 +28,7 @@ public class MainSceneManager : MonoBehaviour
         Util.AssertObject(timerText, "Timer Text is not assigned in the inspector.");
         Util.AssertObject(summaryText, "Summary Text is not assigned in the inspector.");
         Util.AssertObject(storePanel, "Store Panel is not assigned in the inspector.");
+        Util.AssertObject(gardenPanel, "Garden Panel is not assigned in the inspector.");
         Util.AssertObject(scoreText, "Score Text is not assigned in the inspector.");
 
         monsterController = FindFirstObjectByType<MonsterAnimationController>();
@@ -37,6 +40,7 @@ public class MainSceneManager : MonoBehaviour
         timerText.gameObject.SetActive(false);
         summaryText.gameObject.SetActive(false);
         scoreText.gameObject.SetActive(true);
+        gardenPanel.SetActive(true);
         OnToggleDebugMode();
     }
 
@@ -61,12 +65,13 @@ public class MainSceneManager : MonoBehaviour
         timerText.gameObject.SetActive(false);
         summaryText.gameObject.SetActive(false);
         storePanel.SetActive(true);
-        monsterController.gameObject.SetActive(false);
+        gardenPanel.SetActive(false);
+        SetMonsterVisibility(false);
     }
 
     public void OnDeleteUserPressed() => GameManager.Instance.ResetGame();
 
-    public void OnShowGarden() => monsterController.gameObject.SetActive(false);
+    public void OnShowGarden() => ToggleMonsterVisibility();
 
     public void OnToggleDebugMode()
     {
@@ -79,12 +84,25 @@ public class MainSceneManager : MonoBehaviour
         }
     }
 
+    private void ToggleMonsterVisibility()
+    {
+        isMonsterShown = !isMonsterShown;
+        monsterController.gameObject.SetActive(isMonsterShown);
+    }
+
+    private void SetMonsterVisibility(bool isVisible)
+    {
+        isMonsterShown = isVisible;
+        monsterController.gameObject.SetActive(isMonsterShown);
+    }
+
     private IEnumerator InitializeIdle()
     {
         yield return new WaitForSeconds(0f);
         GameManager.Instance.LoadProgress();
-        monsterController.gameObject.SetActive(true);
+        SetMonsterVisibility(true);
         monsterController.SetStartStateIdle();
+        gardenPanel.SetActive(true);
 
         comicsBalloon.SetActive(false);
         timerText.gameObject.SetActive(false);
@@ -95,10 +113,11 @@ public class MainSceneManager : MonoBehaviour
     private IEnumerator GotoSleepRoutine()
     {
         comicsText.text = Util.GetRandomSleepMessage();
-        monsterController.gameObject.SetActive(true);
+        SetMonsterVisibility(true);
         monsterController.ChangeStateToSleep();
 
         comicsBalloon.SetActive(true);
+        gardenPanel.SetActive(true);
         timerText.gameObject.SetActive(false);
         summaryText.gameObject.SetActive(false);
         storePanel.SetActive(false);
@@ -117,11 +136,12 @@ public class MainSceneManager : MonoBehaviour
     private IEnumerator WakeupRoutine()
     {
         GameManager.Instance.StopSleepSession();
-        monsterController.gameObject.SetActive(true);
+        SetMonsterVisibility(true);
         monsterController.ChangeStateToWakeUp();
 
         comicsText.text = Util.GetRandomWakeMessage();
         comicsBalloon.SetActive(true);
+        gardenPanel.SetActive(true);
         timerText.gameObject.SetActive(false);
         summaryText.gameObject.SetActive(false);
         storePanel.SetActive(false);
