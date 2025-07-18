@@ -189,8 +189,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u05D4\u05EA\u05D7\u05D1\u05E8\u05D5\u05EA"
   m_isRightToLeft: 1
-  m_fontAsset: {fileID: 11400000, guid: d3ec83e88422c4562bc4e6802a321852, type: 2}
-  m_sharedMaterial: {fileID: -5354642752054559808, guid: d3ec83e88422c4562bc4e6802a321852, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2ca263ed75d94486fa06fb8e0fd4c970, type: 2}
+  m_sharedMaterial: {fileID: -734184741677539654, guid: 2ca263ed75d94486fa06fb8e0fd4c970, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

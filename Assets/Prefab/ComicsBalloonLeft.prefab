@@ -68,8 +68,8 @@ MonoBehaviour:
   m_text: "\u05DE\u05E9\u05E4\u05D8 \u05E8\u05E0\u05D3\u05D5\u05DE\u05DC\u05D9 \u05E2\u05DD
     \u05DB\u05DE\u05D4 \u05DE\u05D9\u05DC\u05D9\u05DD \u05DB\u05D3\u05D9 \u05DC\u05E2\u05E6\u05D1"
   m_isRightToLeft: 1
-  m_fontAsset: {fileID: 11400000, guid: b19209fcddece409287cd51e9993eb9c, type: 2}
-  m_sharedMaterial: {fileID: -7018340695453316678, guid: b19209fcddece409287cd51e9993eb9c, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2ca263ed75d94486fa06fb8e0fd4c970, type: 2}
+  m_sharedMaterial: {fileID: -734184741677539654, guid: 2ca263ed75d94486fa06fb8e0fd4c970, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
