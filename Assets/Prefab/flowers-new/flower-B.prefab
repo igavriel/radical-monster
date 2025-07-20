@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3905142470402225036}
   - component: {fileID: 4929728210879688796}
   m_Layer: 0
-  m_Name: Flower-8
+  m_Name: flower-B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -45,14 +45,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8ad0ede7fa024130a5d049e7f2eaf9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flowerType: 8
+  flowerType: 4
   stage: 0
   stageSprites:
-  - {fileID: -5145460840569087766, guid: fbb494963c5374f82891b2987828e801, type: 3}
-  - {fileID: 2375293792415724372, guid: 6ceb6f1bd31934ed8911e2f6502488c3, type: 3}
-  - {fileID: 5169733296059871483, guid: 61a96b0932d9241168e7ba7498c172b6, type: 3}
-  - {fileID: 361937428405013582, guid: 250431d4e3ce64a9db2efd05d1ddd837, type: 3}
-  - {fileID: -6907819698395683251, guid: 943f3c164d95946d1854d852f3fd515a, type: 3}
+  - {fileID: 8567642011277631106, guid: c508bfdf97fd541e29ba697ab1a63a24, type: 3}
+  - {fileID: -3398605797196848646, guid: 7c057885c178e4339b9767b1b425c4cc, type: 3}
+  - {fileID: 3532951671977249700, guid: a62020c781ad84a858a174d1eb4911d6, type: 3}
+  - {fileID: 1177172901962999229, guid: 872d3b1dcdab9402ba23dcfcf87b2d88, type: 3}
+  - {fileID: -5121643397556556838, guid: adddbeea3ca7140dcb70eb3c03e1ab2f, type: 3}
 --- !u!212 &4929728210879688796
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -97,7 +97,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -5145460840569087766, guid: fbb494963c5374f82891b2987828e801, type: 3}
+  m_Sprite: {fileID: 8567642011277631106, guid: c508bfdf97fd541e29ba697ab1a63a24, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -11,11 +11,20 @@ public class GameManager : MonoBehaviour
     public bool IsDebugMode { get; private set; } = false;
     public bool IsSleeping { get; private set; } = false;
 
+    [Header("Flowers Prefabs")]
     public List<GameObject> flowersTypePrefabs;
-    public Transform flowerParent;
-    public Collider2D flowerSpawnArea;
 
-    private List<FlowerData> flowers = new();
+    [Header("Front Spawn Settings")]
+    public Transform flowerFrontParent;
+    public Collider2D flowerFrontSpawnArea;
+
+    [Header("Back Spawn Settings")]
+    public Transform flowerBackParent;
+    public Collider2D flowerBackSpawnArea;
+
+    // Flower Data Storage
+    private List<FlowerData> flowersFront = new();
+    private List<FlowerData> flowersBack = new();
 
     void Awake()
     {
@@ -84,15 +93,23 @@ public class GameManager : MonoBehaviour
         // This is a placeholder for actual saving logic
         Debug.Log("Saving game progress...");
         GameData.SaveProgress();
-        PlayerPrefs.SetInt("flowerCount", flowers.Count);
+        SaveFlowerProgress("flowerFront", flowersFront);
+        SaveFlowerProgress("flowerBack", flowersBack);
+        PlayerPrefs.Save();
+    }
+
+    private void SaveFlowerProgress(string prefix, List<FlowerData> flowers)
+    {
+        // Save the current state of flowers to persistent storage
+        PlayerPrefs.SetInt($"{prefix}Count", flowers.Count);
         for (int i = 0; i < flowers.Count; i++)
         {
-            var data = flowers[i];
-            PlayerPrefs.SetInt($"flower_{i}_type", data.flowerType);
-            PlayerPrefs.SetInt($"flower_{i}_stage", data.stage);
-            PlayerPrefs.SetFloat($"flower_{i}_x", data.position.x);
-            PlayerPrefs.SetFloat($"flower_{i}_y", data.position.y);
-            PlayerPrefs.SetFloat($"flower_{i}_z", data.position.z);
+            var flowerData = flowers[i];
+            PlayerPrefs.SetInt($"{prefix}_{i}_type", flowerData.flowerType);
+            PlayerPrefs.SetInt($"{prefix}_{i}_stage", flowerData.stage);
+            PlayerPrefs.SetFloat($"{prefix}_{i}_x", flowerData.position.x);
+            PlayerPrefs.SetFloat($"{prefix}_{i}_y", flowerData.position.y);
+            PlayerPrefs.SetFloat($"{prefix}_{i}_z", flowerData.position.z);
         }
         PlayerPrefs.Save();
     }
@@ -103,19 +120,25 @@ public class GameManager : MonoBehaviour
         // This is a placeholder for actual loading logic
         Debug.Log("Loading game progress...");
         GameData.LoadProgress();
-        int count = PlayerPrefs.GetInt("flowerCount", 0);
+        LoadFlowerProgress("flowerFront", flowersFront);
+        LoadFlowerProgress("flowerBack", flowersBack);
+    }
+
+    private void LoadFlowerProgress(string prefix, List<FlowerData> flowers)
+    {
+        int count = PlayerPrefs.GetInt($"{prefix}Count", 0);
         flowers.Clear();
         for (int i = 0; i < count; i++)
         {
-            int type = PlayerPrefs.GetInt($"flower_{i}_type");
-            int stage = PlayerPrefs.GetInt($"flower_{i}_stage");
-            float x = PlayerPrefs.GetFloat($"flower_{i}_x");
-            float y = PlayerPrefs.GetFloat($"flower_{i}_y");
-            float z = PlayerPrefs.GetFloat($"flower_{i}_z");
+            int type = PlayerPrefs.GetInt($"{prefix}_{i}_type");
+            int stage = PlayerPrefs.GetInt($"{prefix}_{i}_stage");
+            float x = PlayerPrefs.GetFloat($"{prefix}_{i}_x");
+            float y = PlayerPrefs.GetFloat($"{prefix}_{i}_y");
+            float z = PlayerPrefs.GetFloat($"{prefix}_{i}_z");
             Vector3 pos = new Vector3(x, y, z);
 
-            Flower flower = InitializeFlower(type, stage, pos);
-            flowers.Add(flower.ToData());
+            FlowerData flowerData = new FlowerData(type, stage, pos);
+            flowers.Add(flowerData);
         }
     }
 
@@ -125,14 +148,20 @@ public class GameManager : MonoBehaviour
 
         PlayerPrefs.DeleteAll();
         GameData.Reset();
+        ResetFlowers(flowerFrontParent, flowersFront);
+        ResetFlowers(flowerBackParent, flowersBack);
+    }
+
+    private void ResetFlowers(Transform flowersParent, List<FlowerData> flowers)
+    {
         flowers.Clear();
-        foreach (Transform child in flowerParent)
+        foreach (Transform child in flowersParent)
         {
             Destroy(child.gameObject);
         }
     }
 
-    public Flower InitializeFlower(int type, int stage, Vector3 position)
+    public Flower InitializeFlower(int type, int stage, Vector3 position, Transform flowerParent)
     {
         Debug.Log("Creating Flower: " + type + " at position: " + position);
         GameObject flowerObj = Instantiate(
@@ -149,8 +178,14 @@ public class GameManager : MonoBehaviour
     public void AddNewRandomFlower()
     {
         int flowerTypeIndex = UnityEngine.Random.Range(0, flowersTypePrefabs.Count);
+
+        bool isFront = UnityEngine.Random.Range(0, 2) == 0;
+        Collider2D flowerSpawnArea = isFront ? flowerFrontSpawnArea : flowerBackSpawnArea;
+        Transform flowerParent = isFront ? flowerFrontParent : flowerBackParent;
+        List<FlowerData> flowers = isFront ? flowersFront : flowersBack;
+
         Vector3 position = GetRandomPointInCollider(flowerSpawnArea);
-        Flower flower = InitializeFlower(flowerTypeIndex, 0, position);
+        Flower flower = InitializeFlower(flowerTypeIndex, 0, position, flowerParent);
         flowers.Add(flower.ToData());
         SaveProgress();
     }
@@ -173,7 +208,15 @@ public class GameManager : MonoBehaviour
     public void IncreaseAllFlowerStages()
     {
         // clear the current list and build it again from the scene
-        flowers.Clear();
+        flowersFront.Clear();
+        IncreaseFlowerStages(flowerFrontParent, flowersFront);
+        flowersBack.Clear();
+        IncreaseFlowerStages(flowerBackParent, flowersBack);
+        SaveProgress();
+    }
+
+    private void IncreaseFlowerStages(Transform flowerParent, List<FlowerData> flowers)
+    {
         foreach (Transform child in flowerParent)
         {
             if (!child.TryGetComponent<Flower>(out var flowerComponent))
@@ -193,13 +236,13 @@ public class GameManager : MonoBehaviour
             // Update the flower data
             flowers.Add(flowerComponent.ToData());
         }
-        SaveProgress();
     }
 
     public string buildSummaryText()
     {
         string currentTime = Util.GetFormattedTime(GameData.LastGameSleepTime, true);
         string totalTime = Util.GetFormattedTime(GameData.TotalSleepTime, true);
+        int totalFlowers = flowersFront.Count + flowersBack.Count;
 
         StringBuilder sb = new StringBuilder();
         sb.AppendLine("סיכום שינה:");
@@ -208,16 +251,18 @@ public class GameManager : MonoBehaviour
         sb.AppendLine($"אסימונים שנצברו: {Util.reverseString(GameData.LastGameTokens.ToString())}");
         sb.AppendLine($"סה״כ אסימונים: {Util.reverseString(GameData.TotalTokens.ToString())}");
         sb.AppendLine($"פרחים שנצברו: {Util.reverseString(GameData.GetAmountOfFlowers().ToString())}");
-        sb.AppendLine($"סה״כ פרחים: {Util.reverseString(flowers.Count.ToString())}");
+        sb.AppendLine($"סה״כ פרחים: {Util.reverseString(totalFlowers.ToString())}");
 
         return sb.ToString();
     }
 
     public string buildScoreText()
     {
+        int totalFlowers = flowersFront.Count + flowersBack.Count;
+
         StringBuilder sb = new StringBuilder();
         sb.Append($"אסימונים: {Util.reverseString(GameData.TotalTokens.ToString())} | ");
-        sb.Append($"פרחים: {Util.reverseString(flowers.Count.ToString())} | ");
+        sb.Append($"פרחים: {Util.reverseString(totalFlowers.ToString())} | ");
         sb.Append($"זמן שינה: {Util.GetFormattedTime(GameData.TotalSleepTime, true)}");
 
         return sb.ToString();

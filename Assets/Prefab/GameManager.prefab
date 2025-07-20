@@ -45,13 +45,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flowersTypePrefabs:
-  - {fileID: 4429187391274817046, guid: ab602c232354c4fc9af9cfffd4f742e6, type: 3}
-  - {fileID: 4429187391274817046, guid: 688c3400ac1ab406094e15e822b7e6cc, type: 3}
-  - {fileID: 4429187391274817046, guid: 69bf20d22dead4d79a5f0c5da904b890, type: 3}
-  - {fileID: 4429187391274817046, guid: fdc9eebf185ab4cdd81e5b58d6f08e24, type: 3}
   - {fileID: 4429187391274817046, guid: 9ece297a2961f488e9d05c30e71e4b18, type: 3}
-  - {fileID: 4429187391274817046, guid: 32fbf3af4356748388809df68f1cf54c, type: 3}
   - {fileID: 4429187391274817046, guid: 967a5f93cf7ae425a9c2011429686026, type: 3}
-  - {fileID: 4429187391274817046, guid: 6aedbe331d5e74a66b90aa05fc165d1a, type: 3}
+  - {fileID: 4429187391274817046, guid: 5990b78929a1b440a87e2506f874a693, type: 3}
+  - {fileID: 4429187391274817046, guid: e117d1462809a41c2955e954b273b2a2, type: 3}
+  - {fileID: 4429187391274817046, guid: b35650b92b40c4d37a44afef6805bb29, type: 3}
+  - {fileID: 4429187391274817046, guid: 8a596e8ee805d47a5a7a40bac5b2c033, type: 3}
+  - {fileID: 4429187391274817046, guid: 8f8ca4323a2e54b9a97b19b4c6fb04c5, type: 3}
   flowerParent: {fileID: 0}
   flowerSpawnArea: {fileID: 0}

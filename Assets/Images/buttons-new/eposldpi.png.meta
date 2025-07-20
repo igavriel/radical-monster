@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 963ec06fef47344b69b45077059c5248
+guid: 6462e68819b214c61bc0507ff23d1d56
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7954753313157245522
-    second: night_0
+      213: -2564457441182394139
+    second: eposldpi_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: night_0
+      name: eposldpi_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1024
-        height: 1536
+        width: 165
+        height: 161
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ea5966df10a0b9190800000000000000
-      internalID: -7954753313157245522
+      spriteID: 5e857b85b87396cd0800000000000000
+      internalID: -2564457441182394139
       vertices: []
       indices: 
       edges: []
