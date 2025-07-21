@@ -4234,7 +4234,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   comicsBalloon: {fileID: 64907570}
   storePanel: {fileID: 624755783}
-  gardenPanel: {fileID: 1384409802}
+  gardenFrontPanel: {fileID: 1384409802}
+  gardenBackPanel: {fileID: 907354786}
   comicsText: {fileID: 2006504131}
   timerText: {fileID: 1111414329}
   summaryText: {fileID: 95267041}
@@ -7021,7 +7022,7 @@ GameObject:
   - component: {fileID: 1784993714}
   - component: {fileID: 1784993713}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: Score Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7059,7 +7060,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1784993711}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
