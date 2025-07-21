@@ -155,8 +155,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.0000076294, y: -117}
-  m_SizeDelta: {x: 36.95, y: -108.78}
+  m_AnchoredPosition: {x: 15, y: -115}
+  m_SizeDelta: {x: 30, y: -110}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8774025323567661354
 CanvasRenderer:
@@ -188,8 +188,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u05D9\u05E6\u05D9\u05D0\u05D4"
   m_isRightToLeft: 1
-  m_fontAsset: {fileID: 11400000, guid: 2ca263ed75d94486fa06fb8e0fd4c970, type: 2}
-  m_sharedMaterial: {fileID: -734184741677539654, guid: 2ca263ed75d94486fa06fb8e0fd4c970, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: af252fc80c93848989e4af1295d94ff8, type: 2}
+  m_sharedMaterial: {fileID: 7135309570674665959, guid: af252fc80c93848989e4af1295d94ff8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -251,7 +251,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: 30.590034, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

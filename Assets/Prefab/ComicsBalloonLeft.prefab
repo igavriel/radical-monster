@@ -68,8 +68,8 @@ MonoBehaviour:
   m_text: "\u05DE\u05E9\u05E4\u05D8 \u05E8\u05E0\u05D3\u05D5\u05DE\u05DC\u05D9 \u05E2\u05DD
     \u05DB\u05DE\u05D4 \u05DE\u05D9\u05DC\u05D9\u05DD \u05DB\u05D3\u05D9 \u05DC\u05E2\u05E6\u05D1"
   m_isRightToLeft: 1
-  m_fontAsset: {fileID: 11400000, guid: 2ca263ed75d94486fa06fb8e0fd4c970, type: 2}
-  m_sharedMaterial: {fileID: -734184741677539654, guid: 2ca263ed75d94486fa06fb8e0fd4c970, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7108770d146144011bda27792aba126d, type: 2}
+  m_sharedMaterial: {fileID: -7968082325267261975, guid: 7108770d146144011bda27792aba126d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -93,13 +93,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
-  m_fontSizeBase: 100
+  m_fontSize: 120
+  m_fontSizeBase: 120
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 4096
   m_textAlignment: 65535
@@ -203,7 +203,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -258054603252819964, guid: 178fd2a6a3d31469ca341fd570d15240, type: 3}
+  m_Sprite: {fileID: -420903388107038589, guid: 1c919e31c0a314ee1885ecf4ccec25e4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
