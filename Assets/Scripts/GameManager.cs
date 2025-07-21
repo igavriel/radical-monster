@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -256,15 +257,18 @@ public class GameManager : MonoBehaviour
         return sb.ToString();
     }
 
-    public string buildScoreText()
+    public void buildScoreText(TMP_Text coins, TMP_Text sleepTime, TMP_Text flowers)
     {
         int totalFlowers = flowersFront.Count + flowersBack.Count;
 
-        StringBuilder sb = new StringBuilder();
-        sb.Append($"אסימונים: {Util.reverseString(GameData.TotalTokens.ToString())} | ");
-        sb.Append($"פרחים: {Util.reverseString(totalFlowers.ToString())} | ");
-        sb.Append($"זמן שינה: {Util.GetFormattedTime(GameData.TotalSleepTime, true)}");
+        coins.text = GameData.TotalTokens.ToString();
+        sleepTime.text = Util.GetFormattedTime(GameData.TotalSleepTime, false);
+        flowers.text = totalFlowers.ToString();
 
-        return sb.ToString();
+        //        StringBuilder sb = new StringBuilder();
+        //sb.Append($"אסימונים: {Util.reverseString(GameData.TotalTokens.ToString())} | ");
+        //sb.Append($"פרחים: {Util.reverseString(totalFlowers.ToString())} | ");
+        //sb.Append($"זמן שינה: {Util.GetFormattedTime(GameData.TotalSleepTime, true)}");
+
     }
 }

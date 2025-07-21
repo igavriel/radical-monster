@@ -7,11 +7,14 @@ public class MainSceneManager : MonoBehaviour
 {
     public GameObject comicsBalloon;
     public GameObject storePanel;
-    public GameObject gardenPanel;
+    public GameObject gardenFrontPanel;
+    public GameObject gardenBackPanel;
     public TMP_Text comicsText;
     public TMP_Text timerText;
     public TMP_Text summaryText;
-    public TMP_Text scoreText;
+    public TMP_Text scoreCoinsText;
+    public TMP_Text scoreSleepTimeText;
+    public TMP_Text scoreFlowersText;
 
     public GameObject[] debugObjects;
 
@@ -28,8 +31,11 @@ public class MainSceneManager : MonoBehaviour
         Util.AssertObject(timerText, "Timer Text is not assigned in the inspector.");
         Util.AssertObject(summaryText, "Summary Text is not assigned in the inspector.");
         Util.AssertObject(storePanel, "Store Panel is not assigned in the inspector.");
-        Util.AssertObject(gardenPanel, "Garden Panel is not assigned in the inspector.");
-        Util.AssertObject(scoreText, "Score Text is not assigned in the inspector.");
+        Util.AssertObject(gardenFrontPanel, "Garden Front Panel is not assigned in the inspector.");
+        Util.AssertObject(gardenBackPanel, "Garden Back Panel is not assigned in the inspector.");
+        Util.AssertObject(scoreCoinsText, "Score Coins Text is not assigned in the inspector.");
+        Util.AssertObject(scoreSleepTimeText, "Score Sleep Time Text is not assigned in the inspector.");
+        Util.AssertObject(scoreFlowersText, "Score Flowers Text is not assigned in the inspector.");
 
         monsterController = FindFirstObjectByType<MonsterAnimationController>();
         Util.AssertObject(monsterController, "MonsterAnimationController not found in the scene.");
@@ -39,14 +45,21 @@ public class MainSceneManager : MonoBehaviour
         comicsBalloon.SetActive(false);
         timerText.gameObject.SetActive(false);
         summaryText.gameObject.SetActive(false);
-        scoreText.gameObject.SetActive(true);
-        gardenPanel.SetActive(true);
+        scoreCoinsText.gameObject.SetActive(true);
+        scoreSleepTimeText.gameObject.SetActive(true);
+        scoreFlowersText.gameObject.SetActive(true);
+        gardenFrontPanel.SetActive(true);
+        gardenBackPanel.SetActive(true);
         OnToggleDebugMode();
     }
 
     private void Update()
     {
-        scoreText.text = GameManager.Instance.buildScoreText();
+        GameManager.Instance.buildScoreText(
+            scoreCoinsText,
+            scoreSleepTimeText,
+            scoreFlowersText
+        );
         if (!GameManager.Instance.IsSleeping)
             return;
 
@@ -65,7 +78,8 @@ public class MainSceneManager : MonoBehaviour
         timerText.gameObject.SetActive(false);
         summaryText.gameObject.SetActive(false);
         storePanel.SetActive(true);
-        gardenPanel.SetActive(false);
+        gardenFrontPanel.SetActive(false);
+        gardenBackPanel.SetActive(false);
         SetMonsterVisibility(false);
     }
 
@@ -102,7 +116,8 @@ public class MainSceneManager : MonoBehaviour
         GameManager.Instance.LoadProgress();
         SetMonsterVisibility(true);
         monsterController.SetStartStateIdle();
-        gardenPanel.SetActive(true);
+        gardenFrontPanel.SetActive(true);
+        gardenBackPanel.SetActive(true);
 
         comicsBalloon.SetActive(false);
         timerText.gameObject.SetActive(false);
@@ -117,7 +132,8 @@ public class MainSceneManager : MonoBehaviour
         monsterController.ChangeStateToSleep();
 
         comicsBalloon.SetActive(true);
-        gardenPanel.SetActive(true);
+        gardenFrontPanel.SetActive(true);
+        gardenBackPanel.SetActive(true);
         timerText.gameObject.SetActive(false);
         summaryText.gameObject.SetActive(false);
         storePanel.SetActive(false);
@@ -141,7 +157,8 @@ public class MainSceneManager : MonoBehaviour
 
         comicsText.text = Util.GetRandomWakeMessage();
         comicsBalloon.SetActive(true);
-        gardenPanel.SetActive(true);
+        gardenFrontPanel.SetActive(true);
+        gardenBackPanel.SetActive(true);
         timerText.gameObject.SetActive(false);
         summaryText.gameObject.SetActive(false);
         storePanel.SetActive(false);
