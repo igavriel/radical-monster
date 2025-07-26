@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: e057fec8f3a634a56b2aa9ec13b0e851
+guid: 35522d78ed1304610ab43bcdc912b1d9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2425509576850515195
-    second: Btn_Debug_Red_27_0
+      213: -1698927842703620149
+    second: Btn_Debug_Red_270_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,12 +126,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Btn_Debug_Red_27_0
+      name: Btn_Debug_Red_270_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 150
+        width: 152
         height: 149
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bf4ab77fb1429a120800000000000000
-      internalID: 2425509576850515195
+      spriteID: bc741acd0223c68e0800000000000000
+      internalID: -1698927842703620149
       vertices: []
       indices: 
       edges: []
