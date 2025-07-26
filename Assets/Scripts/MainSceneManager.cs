@@ -9,6 +9,7 @@ public class MainSceneManager : MonoBehaviour
     public GameObject storePanel;
     public GameObject gardenFrontPanel;
     public GameObject gardenBackPanel;
+    public GameObject summaryPanel;
     public TMP_Text comicsText;
     public TMP_Text timerText;
     public TMP_Text summaryText;
@@ -33,6 +34,7 @@ public class MainSceneManager : MonoBehaviour
         Util.AssertObject(storePanel, "Store Panel is not assigned in the inspector.");
         Util.AssertObject(gardenFrontPanel, "Garden Front Panel is not assigned in the inspector.");
         Util.AssertObject(gardenBackPanel, "Garden Back Panel is not assigned in the inspector.");
+        Util.AssertObject(summaryPanel, "Summary Panel is not assigned in the inspector.");
         Util.AssertObject(scoreCoinsText, "Score Coins Text is not assigned in the inspector.");
         Util.AssertObject(scoreSleepTimeText, "Score Sleep Time Text is not assigned in the inspector.");
         Util.AssertObject(scoreFlowersText, "Score Flowers Text is not assigned in the inspector.");
@@ -45,6 +47,7 @@ public class MainSceneManager : MonoBehaviour
         comicsBalloon.SetActive(false);
         timerText.gameObject.SetActive(false);
         summaryText.gameObject.SetActive(false);
+        summaryPanel.SetActive(false);
         scoreCoinsText.gameObject.SetActive(true);
         scoreSleepTimeText.gameObject.SetActive(true);
         scoreFlowersText.gameObject.SetActive(true);
@@ -77,6 +80,7 @@ public class MainSceneManager : MonoBehaviour
         comicsBalloon.SetActive(false);
         timerText.gameObject.SetActive(false);
         summaryText.gameObject.SetActive(false);
+        summaryPanel.SetActive(false);
         storePanel.SetActive(true);
         gardenFrontPanel.SetActive(false);
         gardenBackPanel.SetActive(false);
@@ -122,6 +126,7 @@ public class MainSceneManager : MonoBehaviour
         comicsBalloon.SetActive(false);
         timerText.gameObject.SetActive(false);
         summaryText.gameObject.SetActive(false);
+        summaryPanel.SetActive(false);
         storePanel.SetActive(false);
     }
 
@@ -136,6 +141,7 @@ public class MainSceneManager : MonoBehaviour
         gardenBackPanel.SetActive(true);
         timerText.gameObject.SetActive(false);
         summaryText.gameObject.SetActive(false);
+        summaryPanel.SetActive(false);
         storePanel.SetActive(false);
         GameManager.Instance.StartSleepSession();
 
@@ -144,6 +150,7 @@ public class MainSceneManager : MonoBehaviour
         comicsBalloon.SetActive(false);
         timerText.gameObject.SetActive(true);
         summaryText.gameObject.SetActive(false);
+        summaryPanel.SetActive(false);
         storePanel.SetActive(false);
 
         monsterController.SetStartStateSleep();
@@ -161,6 +168,7 @@ public class MainSceneManager : MonoBehaviour
         gardenBackPanel.SetActive(true);
         timerText.gameObject.SetActive(false);
         summaryText.gameObject.SetActive(false);
+        summaryPanel.SetActive(false);
         storePanel.SetActive(false);
 
         yield return new WaitForSeconds(wakeupComicDuration);
@@ -170,6 +178,7 @@ public class MainSceneManager : MonoBehaviour
         comicsBalloon.SetActive(false);
         timerText.gameObject.SetActive(false);
         summaryText.gameObject.SetActive(true);
+        summaryPanel.SetActive(true);
         storePanel.SetActive(false);
 
         monsterController.SetStartStateWakeUp();
