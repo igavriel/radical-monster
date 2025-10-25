@@ -37,7 +37,7 @@ public class ToolbarManager : MonoBehaviour
         StartCoroutine(SwitchToolbar(newState));
     }
 
-    private IEnumerator SwitchToolbar(GameState newState)
+private IEnumerator SwitchToolbar(GameState newState)
     {
         RectTransform nextToolbar = null;
         Vector2 nextHiddenPos = Vector2.zero;
